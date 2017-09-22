@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="修改个人信息"
+         android:layout_gravity="center"
+         android:textColor="@color/colorFont"
+         android:layout_margin="15dp"
+         android:textSize="18sp" />
+      <EditText
+          android:id="@+id/write_et_content"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:hint="写点什么"
+          android:padding="10dp"
+          android:maxLength="100"
+          android:maxHeight="300dp"
+          android:drawableLeft="@drawable/act_address_change_edit"
+          />
+      <Button
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="修改"
+          android:background="@color/colorBackground"
+          android:textColor="@color/colorFont"
+          android:layout_gravity="center"
+          />
+</LinearLayout>

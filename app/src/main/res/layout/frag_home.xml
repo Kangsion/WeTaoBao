@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <include layout="@layout/top_title_bar"></include>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical"
+          >
+          <com.jude.rollviewpager.RollPagerView
+              android:id="@+id/frag_home_roll_vp_ad"
+              android:layout_width="match_parent"
+              android:layout_height="125dp" />
+
+          <com.example.ksion.wetaobao.widget.SourcePanel
+              android:id="@+id/frag_home_gv_sort"
+              android:layout_width="match_parent"
+              android:layout_height="180dp"
+              android:numColumns="5" />
+           <View
+               android:layout_width="match_parent"
+               android:layout_height="1dp"
+               android:background="@color/colorLine" />
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="45dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/frag_home_toutiao" />
+
+            <com.sunfusheng.marqueeview.MarqueeView
+                android:id="@+id/frag_home_gv_marquee"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                />
+           </LinearLayout>
+          <View
+              android:layout_width="match_parent"
+              android:layout_height="1dp"
+              android:background="@color/colorLine" />
+
+          <com.example.ksion.wetaobao.widget.SourcePanel
+              android:id="@+id/frag_home_gv_content"
+              android:layout_width="match_parent"
+              android:layout_height="300dp"
+              android:layout_marginTop="20dp"
+              android:layout_weight="1"
+              android:numColumns="2" />
+      </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

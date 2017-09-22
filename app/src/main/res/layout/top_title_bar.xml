@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/colorTop"
+    >
+   <Button
+       android:id="@+id/top_title_scan"
+       android:layout_width="45dp"
+       android:layout_height="wrap_content"
+       android:background="@color/colorTransparency"
+       android:layout_marginRight="10dp"
+       android:layout_marginBottom="5dp"
+       android:layout_marginTop="6dp"
+       android:text="@string/top_title_scan"
+       android:textSize="12sp"
+       android:textColor="@color/colorTopIcon"
+       android:drawableTop="@mipmap/act_home_scan"/>
+   <EditText
+       android:id="@+id/id_search"
+       android:layout_weight="1"
+       android:layout_width="0dp"
+       android:layout_height="match_parent"
+       android:layout_marginTop="5dp"
+       android:layout_marginBottom="5dp"
+       android:background="@color/colorTopSearch"
+       android:drawableRight="@mipmap/act_home_take_photo"
+       android:drawableLeft="@mipmap/act_home_search"
+       android:textColor="@color/colorTopIcon"
+       android:textColorHint="@color/colorTopIcon"
+       android:hint="衣服、三库"/>
+
+   <Button
+       android:id="@+id/top_title_msg"
+       android:layout_width="45dp"
+       android:layout_height="wrap_content"
+       android:background="@color/colorTransparency"
+       android:text="消息"
+       android:layout_marginLeft="10dp"
+       android:layout_marginTop="6dp"
+       android:textSize="12sp"
+       android:layout_marginBottom="5dp"
+       android:textColor="@color/colorTopIcon"
+       android:drawableTop="@mipmap/act_home_msg"/>
+</LinearLayout>
