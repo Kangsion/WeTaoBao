@@ -1,22 +1,23 @@
 package com.example.ksion.wetaobao.presenter;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.example.ksion.wetaobao.Application.CustomApplcation;
-import com.example.ksion.wetaobao.R;
 import com.example.ksion.wetaobao.adapter.ActGoodsResultAdapter;
 import com.example.ksion.wetaobao.bean.Goods;
 import com.example.ksion.wetaobao.bean.GoodsType;
-import com.example.ksion.wetaobao.contract.GoodDetailsContract;
 import com.example.ksion.wetaobao.contract.GoodResultContract;
-import com.example.ksion.wetaobao.gen.GoodsDao;
-import com.example.ksion.wetaobao.gen.GoodsTypeDao;
-import com.example.ksion.wetaobao.manager.GreenDaoManager;
 
-import java.util.ArrayList;
+
 import java.util.List;
+
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.datatype.BmobQueryResult;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.SQLQueryListener;
 
 /**
  * Created by Ksion on 2017/9/11.
@@ -28,28 +29,31 @@ public class ActGoodsResultPresenterImpl implements GoodResultContract.GoodResul
 
     List<Goods> goodsList;
 
-    GoodsDao goodsDao;
-
     //商品类别ID
-    private String typename;
+    private String typeId;
 
-    public ActGoodsResultPresenterImpl(GoodResultContract.GoodResultView view,String typename)
+    public ActGoodsResultPresenterImpl(GoodResultContract.GoodResultView view,String typeId)
     {
         this.view=view;
-        this.typename=typename;
+        this.typeId=typeId;
         view.setPresenter(this);
     }
 
     @Override
     public void initData() {
         gridView=view.getmActGoodsResultGv();
+        String sql="select * from Goods where goodsTypeId='"+typeId+"'";
+        new BmobQuery<Goods>().doSQLQuery(view.getContext(),sql, new SQLQueryListener<Goods>() {
+            @Override
+            public void done(BmobQueryResult<Goods> bmobQueryResult, BmobException e) {
+                if(!bmobQueryResult.getResults().isEmpty()) {
+                    goodsList = bmobQueryResult.getResults();
+                    gridView.setAdapter(new ActGoodsResultAdapter(goodsList, CustomApplcation.getInstance().context));
+                    initEvent();
+                }
+            }
+        });
 
-        goodsDao= GreenDaoManager.getInstance().getNewSession().getGoodsDao();
-
-        goodsList=goodsDao.queryBuilder().where(GoodsDao.Properties.GoodsTypeId.eq(typename)).list();
-        gridView.setAdapter(new ActGoodsResultAdapter(goodsList,CustomApplcation.getInstance().context));
-
-        initEvent();
     }
 
     /**

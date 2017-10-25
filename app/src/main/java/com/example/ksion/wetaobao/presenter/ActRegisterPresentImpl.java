@@ -5,9 +5,9 @@ import android.widget.TextView;
 
 import com.example.ksion.wetaobao.bean.User;
 import com.example.ksion.wetaobao.contract.RegisterContract;
-import com.example.ksion.wetaobao.gen.UserDao;
-import com.example.ksion.wetaobao.manager.GreenDaoManager;
 import com.example.ksion.wetaobao.util.DataProcessingUtils;
+
+import cn.bmob.v3.listener.SaveListener;
 
 /**
  * Created by Ksion on 2017/9/13.
@@ -17,7 +17,7 @@ public class ActRegisterPresentImpl  implements RegisterContract.RegisterPresent
      private RegisterContract.RegisterView view;
      private EditText mEtPhone, mEtCode, mEtNickName, mEtPwd, mEtPwd2;
      private TextView mTvGetCode;
-     UserDao userDao;
+
 
      public ActRegisterPresentImpl(RegisterContract.RegisterView view)
      {
@@ -48,15 +48,25 @@ public class ActRegisterPresentImpl  implements RegisterContract.RegisterPresent
         } else if (!Pwd.equals(Pwd2)) {
             view.showMsg("两次输入密码不一致");
         } else {
-             User findUser=userDao.queryBuilder().where(UserDao.Properties.Phone.eq(phone)).unique();
-            if(findUser==null) {
-                User user = new User(null, NickName, null, "男", null, Pwd, phone);
-                userDao.insert(user);
-                view.showMsg("注册成功");
-                view.jumpActivity();
-            } else {
-                view.showMsg("用户名已存在");
-            }
+            view.showLoadingDialog("","注册中...",false);
+            User user=new User();
+            user.setPhone(phone);
+            user.setUserName(NickName);
+            user.setPwd(Pwd);
+            user.save(view.getContext(),new SaveListener() {
+
+                @Override
+                public void onSuccess() {
+                    view.showMsg("注册成功");
+                    view.jumpActivity();
+                }
+
+                @Override
+                public void onFailure(int i, String s) {
+                    view.showMsg("注册失败"+s);
+                 }
+            });
+
         }
     }
 
@@ -68,7 +78,5 @@ public class ActRegisterPresentImpl  implements RegisterContract.RegisterPresent
          mEtPwd2=view.getmActRegEtPwd2();
          mEtCode=view.getmActHomeEtSmsCode();
          mTvGetCode=view.getmFragRegisterTvGetcode();
-
-         userDao = GreenDaoManager.getInstance().getNewSession().getUserDao();
     }
 }

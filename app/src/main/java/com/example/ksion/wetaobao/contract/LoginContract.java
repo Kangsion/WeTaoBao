@@ -1,5 +1,6 @@
 package com.example.ksion.wetaobao.contract;
 
+import android.content.Context;
 import android.widget.EditText;
 
 import com.example.ksion.wetaobao.base.BasePresenter;
@@ -38,6 +39,8 @@ public class LoginContract {
           * activity的跳转
           */
          void jumpActivity();
+
+         Context getContext();
      }
     public  interface LoginPresenter extends BasePresenter<LoginView> {
         /**

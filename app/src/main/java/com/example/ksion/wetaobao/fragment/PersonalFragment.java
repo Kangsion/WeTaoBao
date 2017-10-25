@@ -10,14 +10,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.ksion.wetaobao.Application.CustomApplcation;
 import com.example.ksion.wetaobao.R;
 import com.example.ksion.wetaobao.activity.LoginActivity;
+import com.example.ksion.wetaobao.activity.MyOrderActivity;
 import com.example.ksion.wetaobao.activity.PersonalDetailActivity;
 import com.example.ksion.wetaobao.activity.SettingActivity;
 import com.example.ksion.wetaobao.base.BaseFragment;
+import com.example.ksion.wetaobao.bean.User;
 import com.example.ksion.wetaobao.config.Contracts;
 import com.example.ksion.wetaobao.contract.PersonalContract;
 import com.example.ksion.wetaobao.presenter.PersonalPresenterImpl;
@@ -46,17 +49,17 @@ public class PersonalFragment extends BaseFragment implements PersonalContract.P
     GridView mFragPersonalGvCenter;
     GridView mFragPersonalGvBottom;
 
-    private boolean isPrepare;
+    RelativeLayout mFragPersonalLvmyOrder;
+
+    private boolean isPrepared=false;
 
     public void lazyLoad()
     {
-        if(!isPrepare||!isVisible)
-        {
+        if(!isPrepared) {
             return;
         }
-        if(!isLogin())
-        {
-            startActivityForResult(new Intent(getContext(), LoginActivity.class),300);
+        if(!isLogin()) {
+            startActivityForResult(new Intent(getContext(), LoginActivity.class),100);
         }
         else{
            setUserData();
@@ -68,8 +71,6 @@ public class PersonalFragment extends BaseFragment implements PersonalContract.P
     @Override
     public View initLayout(LayoutInflater inflater, ViewGroup container, boolean b) {
         View rootView=inflater.inflate(R.layout.frag_personal,null);
-        isPrepare=true;
-        lazyLoad();
         mSettings= (TextView) rootView.findViewById(R.id.frag_personal_tv_setting);
         mMyname= (TextView) rootView.findViewById(R.id.frag_personal_tv_nick_name);
         mBtnPay= (Button) rootView.findViewById(R.id.frag_personal_btn_pay);
@@ -80,16 +81,21 @@ public class PersonalFragment extends BaseFragment implements PersonalContract.P
         mFragPersonalGvCenter= (GridView) rootView.findViewById(R.id.frag_personal_gv_center);
         mFragPersonalGvBottom= (GridView) rootView.findViewById(R.id.frag_personal_gv_bottom);
         mMyHead= (ImageView) rootView.findViewById(R.id.frag_personal_iv_head);
+        mFragPersonalLvmyOrder= (RelativeLayout) rootView.findViewById(R.id.frag_personal_rl_show_dingdan);
+        isPrepared=true;
+        lazyLoad();
         return rootView;
+
     }
 
     @Override
-    protected void initData(@Nullable Bundle savedInstanceState) {
+    protected void initData(Bundle savedInstanceState) {
          new PersonalPresenterImpl(this);
          presenter.initData();
 
         mMyHead.setOnClickListener(this);
         mSettings.setOnClickListener(this);
+        mFragPersonalLvmyOrder.setOnClickListener(this);
     }
 
 
@@ -142,7 +148,7 @@ public class PersonalFragment extends BaseFragment implements PersonalContract.P
                 startActivity(new Intent(getContext(), PersonalDetailActivity.class));
                 break;
             case R.id.frag_personal_rl_show_dingdan:
-                presenter.queryOrders(-1);
+                startActivity(new Intent(getContext(), MyOrderActivity.class));
                 break;
             case R.id.frag_personal_btn_pay:
                 presenter.queryOrders(0);
@@ -165,13 +171,15 @@ public class PersonalFragment extends BaseFragment implements PersonalContract.P
         }
     }
     private void setUserData() {
-        mMyname.setText(CustomApplcation.getInstance().getCurrentUser().getNickName());
-        String url="";
-        if(CustomApplcation.getInstance().getCurrentUser().getUserHead()==null)
-        {
-            url= Contracts.DEFALT_HEAD_URL;
+        User user=CustomApplcation.getInstance().getCurrentUser();
+        if(user!=null) {
+            mMyname.setText(user.getUserName());
+            String url = "";
+            if (user.getUserHead()== null) {
+                url = Contracts.DEFALT_HEAD_URL;
+            }
+            //设置头像
+           // Picasso.with(getContext()).load(url).into(mMyHead);
         }
-        //设置头像
-        Picasso.with(getContext()).load(url).into(mMyHead);
     }
 }

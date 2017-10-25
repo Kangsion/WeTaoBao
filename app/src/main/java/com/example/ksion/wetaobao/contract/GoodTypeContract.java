@@ -1,5 +1,6 @@
 package com.example.ksion.wetaobao.contract;
 
+import android.content.Context;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 
@@ -25,6 +26,8 @@ public class GoodTypeContract {
          * @param flag 是否可以取消
          */
         void showLoadingDialog(String title, String msg, boolean flag);
+
+        Context getContext();
 
         /**
          * 取消进度条

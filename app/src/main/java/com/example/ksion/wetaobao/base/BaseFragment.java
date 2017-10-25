@@ -2,7 +2,10 @@ package com.example.ksion.wetaobao.base;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -108,5 +111,62 @@ public abstract class BaseFragment extends Fragment{
         //移除当前视图，防止重复加载相同视图使得程序闪退
         ((ViewGroup) contentView.getParent()).removeView(contentView);
         super.onDestroyView();
+    }
+
+    /**
+     *  功能 ：显示一个警告对话框
+     */
+    protected void showAlertDialog(String title,String text){
+        if (builder==null){
+            //创建一个构建者对象
+            builder = new AlertDialog.Builder(getContext());
+            builder.setTitle(title).setMessage(text).setCancelable(false);
+            builder.setPositiveButton("设置", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    //跳转到系统网络设置
+                    Intent intent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
+                    startActivity(intent);
+                }
+            }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    //退出虚拟机
+                    System.exit(0);
+                }
+            });
+        }
+        alertDialog = builder.show();
+    }
+
+    /**
+     * 功能:取消警告对话框
+     */
+    protected void dismissAlertDialog(){
+        if (alertDialog!=null){
+            //取消警告对话框
+            alertDialog.dismiss();
+        }
+    }
+    /**
+     * 功能 ：显示一个进度条对话框
+     */
+    protected void showProcessDialog(String title,String msg,boolean falg){
+        if(dialog==null){
+            dialog = new ProgressDialog(getContext());
+        }
+        dialog.setTitle(title);
+        dialog.setMessage(msg);
+        dialog.setCancelable(falg);
+        dialog.show();
+    }
+
+    /**
+     * 功能 ：取消一个进度条对话框
+     */
+    protected void dismissProcessDialog(){
+        if(dialog!=null){
+            dialog.dismiss();
+        }
     }
 }

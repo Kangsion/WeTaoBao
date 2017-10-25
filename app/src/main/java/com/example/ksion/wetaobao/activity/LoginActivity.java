@@ -1,5 +1,6 @@
 package com.example.ksion.wetaobao.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -30,12 +31,15 @@ public class LoginActivity extends BaseActivity implements LoginContract.LoginVi
 
     private LoginContract.LoginPresenter presenter;
 
+    private Context context;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_login);
-        new LoginPresenterImpl(this);
+        context=this;
         initView();
+        new LoginPresenterImpl(this);
         presenter.initData();
     }
 
@@ -72,18 +76,23 @@ public class LoginActivity extends BaseActivity implements LoginContract.LoginVi
 
     @Override
     public void showLoadingDialog(String title, String msg, boolean flag) {
-
+          super.showProcessDialog(title,msg,flag);
     }
 
     @Override
     public void canelLoadingDialog() {
-
-    }
+        super.dismissProcessDialog();
+     }
 
     @Override
     public void jumpActivity() {
        setResult(200);
         finish();
+    }
+
+    @Override
+    public Context getContext() {
+        return context;
     }
 
     @Override
@@ -107,7 +116,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.LoginVi
                 startActivity(new Intent(this,ForgetPwdActivity.class));
                 break;
             case R.id.frag_login_iv_back:
-                finish();
+                startActivity(new Intent(this,HomeActivity.class));
                 break;
         }
     }

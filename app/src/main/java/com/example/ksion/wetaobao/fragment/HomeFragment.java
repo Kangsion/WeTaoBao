@@ -40,6 +40,8 @@ public class HomeFragment extends BaseFragment implements IhomeContract.IHomeVie
 
     EditText editText;
 
+    GridView mGridViewGoodList;
+
     @Override
     public View initLayout(LayoutInflater inflater, ViewGroup container, boolean b) {
         View rootView=inflater.inflate(R.layout.frag_home,null);
@@ -48,6 +50,7 @@ public class HomeFragment extends BaseFragment implements IhomeContract.IHomeVie
         gridViewContent= (GridView) rootView.findViewById(R.id.frag_home_gv_content);
         marqueeViewTop= (MarqueeView) rootView.findViewById(R.id.frag_home_gv_marquee);
         editText= (EditText) rootView.findViewById(R.id.id_search);
+        mGridViewGoodList= (GridView) rootView.findViewById(R.id.frag_home_gv_good_list);
         return rootView;
     }
 
@@ -86,6 +89,11 @@ public class HomeFragment extends BaseFragment implements IhomeContract.IHomeVie
     @Override
     public MarqueeView getMarqueeViewTop() {
         return marqueeViewTop;
+    }
+
+    @Override
+    public GridView getGridViewGoodList() {
+        return mGridViewGoodList;
     }
 
     @Override

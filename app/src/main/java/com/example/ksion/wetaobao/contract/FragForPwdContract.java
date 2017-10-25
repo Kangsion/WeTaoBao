@@ -1,5 +1,6 @@
 package com.example.ksion.wetaobao.contract;
 
+import android.content.Context;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -27,6 +28,8 @@ public class FragForPwdContract  {
          * @param flag  是否可以取消
          */
         void showLoadingDialog(String title, String msg, boolean flag);
+
+         Context getContext();
 
         /**
          * 取消进度条

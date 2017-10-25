@@ -1,5 +1,6 @@
 package com.example.ksion.wetaobao.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
@@ -41,6 +42,11 @@ public class HomeActivity extends BaseActivity implements IhomeContract.IHomeVie
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent=getIntent();
+        if(intent.getStringExtra("ShopCar")!=null)
+        {
+            ChangeFragment(intent);
+        }
         setContentView(R.layout.act_home);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         initView();
@@ -48,6 +54,12 @@ public class HomeActivity extends BaseActivity implements IhomeContract.IHomeVie
         btns[0].setEnabled(false);
         presenter.initData();
 
+    }
+
+    private void ChangeFragment(Intent intent) {
+        int Change= intent.getIntExtra("ShopCar",3);
+        SelectChangeBtnColor(Change);
+        mActHomeVpContent.setCurrentItem(Change);
     }
 
     private void initView() {
@@ -94,6 +106,11 @@ public class HomeActivity extends BaseActivity implements IhomeContract.IHomeVie
 
     @Override
     public MarqueeView getMarqueeViewTop() {
+        return null;
+    }
+
+    @Override
+    public GridView getGridViewGoodList() {
         return null;
     }
 

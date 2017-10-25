@@ -1,54 +1,42 @@
 package com.example.ksion.wetaobao.bean;
 
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Generated;
+import cn.bmob.v3.BmobObject;
 
 /**
  * Created by Ksion on 2017/9/13.
  */
-@Entity
-public class Discuss {
+
+public class Discuss extends BmobObject{
     //商品id
-    private String goodsId;
+    private String goodId;
     //评论内容
     private String discussText;
     //评论的人
-    private String discussUserId;
-    //评论时间
-    private String discussTime;
-    @Generated(hash = 1227945685)
-    public Discuss(String goodsId, String discussText, String discussUserId,
-            String discussTime) {
-        this.goodsId = goodsId;
-        this.discussText = discussText;
-        this.discussUserId = discussUserId;
-        this.discussTime = discussTime;
+    private String phone;
+
+    public String getGoodId() {
+        return goodId;
     }
-    @Generated(hash = 1577192031)
-    public Discuss() {
+
+    public void setGoodId(String goodId) {
+        this.goodId = goodId;
     }
-    public String getGoodsId() {
-        return this.goodsId;
-    }
-    public void setGoodsId(String goodsId) {
-        this.goodsId = goodsId;
-    }
+
     public String getDiscussText() {
-        return this.discussText;
+        return discussText;
     }
+
     public void setDiscussText(String discussText) {
         this.discussText = discussText;
     }
-    public String getDiscussUserId() {
-        return this.discussUserId;
+
+    public String getPhone() {
+        return phone;
     }
-    public void setDiscussUserId(String discussUserId) {
-        this.discussUserId = discussUserId;
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
-    public String getDiscussTime() {
-        return this.discussTime;
-    }
-    public void setDiscussTime(String discussTime) {
-        this.discussTime = discussTime;
-    }
+
+
 }

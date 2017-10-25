@@ -9,12 +9,9 @@ import com.example.ksion.wetaobao.Application.CustomApplcation;
 import com.example.ksion.wetaobao.bean.Goods;
 import com.example.ksion.wetaobao.bean.Order;
 import com.example.ksion.wetaobao.contract.OrderContract;
-import com.example.ksion.wetaobao.gen.OrderDao;
-import com.example.ksion.wetaobao.manager.GreenDaoManager;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Created by Ksion on 2017/9/19.
@@ -29,8 +26,6 @@ public class ActOrderPresenterImpl implements OrderContract.OrderPresenter {
 
     List<String> goodsList;
 
-    OrderDao orderDao;
-
     public ActOrderPresenterImpl(OrderContract.OrderView view)
     {
         this.view=view;
@@ -40,7 +35,6 @@ public class ActOrderPresenterImpl implements OrderContract.OrderPresenter {
     @Override
     public void initData() {
         goods= (Goods) CustomApplcation.getDatas("goods",false);
-        orderDao= GreenDaoManager.getInstance().getNewSession().getOrderDao();
         mEtCount=view.getmActOrderEtCount();
         mTvPrice=view.getmActOrderTvGoodsMoney();
         mTvMoney=view.getmActOrdersTvNumMoney();
@@ -76,12 +70,12 @@ public class ActOrderPresenterImpl implements OrderContract.OrderPresenter {
         Order orders = new Order();
         orders.setOrderId(goods.getGoodsName()+sum+count);
         goodsList.add(goods.getGoodsName());
-        orders.setGoodIds(goodsList);
-        orders.setUserId(CustomApplcation.getInstance().getCurrentUser().getUserId().toString());
+       /* orders.setGoodIds(goodsList);
+        orders.setUserId(CustomApplcation.getInstance().getCurrentUser().toString());*/
         orders.setOrdersState(0);//设置订单状态为代付款0
         orders.setOerdersMoney(sum);
         orders.setGoodsCount(count);
-        long a=orderDao.insert(orders);
+    /*    long a=orderDao.insert(orders);
             if(a>0) {
                     view.showMsg("下单成功,将要跳转到支付界面");
                     //将直接跳转到支付页面,将订单号和金额传递到支付activity
@@ -90,7 +84,7 @@ public class ActOrderPresenterImpl implements OrderContract.OrderPresenter {
                 }else {
                     view.showMsg("下单失败!");
 
-                }
+                }*/
             }
 
 

@@ -1,5 +1,6 @@
 package com.example.ksion.wetaobao.contract;
 
+import android.content.Context;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -24,6 +25,7 @@ public class RegisterContract {
 
          TextView getmFragRegisterTvGetcode();
 
+         Context getContext();
          /**
           * Toast数据
           * @param msg

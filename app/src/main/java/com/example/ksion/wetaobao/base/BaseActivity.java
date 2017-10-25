@@ -1,5 +1,7 @@
 package com.example.ksion.wetaobao.base;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +17,12 @@ import com.example.ksion.wetaobao.bean.User;
  */
 
 public class BaseActivity extends FragmentActivity {
+
+    //声明一个构建着对象，用于创建警告对话框
+    private AlertDialog.Builder builder;
+    //用于创建一个进度条对话框
+    private ProgressDialog dialog;
+
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
@@ -40,4 +48,52 @@ public class BaseActivity extends FragmentActivity {
        // CustomApplcation.getInstance().setCurrentUser(BmobUser.getCurrentUser(User.class));
         return true;
     }
+
+    /**
+     * 功能：显示一个警告对话框,无按钮，需要自己设置
+     * @param title  标题
+     * @param msg 内容
+     * @param flag 是否可以取消
+     * @return AlertDialog.Builder 对象
+     */
+    protected AlertDialog.Builder showAlertDialog(String title, String msg, boolean flag){
+        if (builder==null){
+            //创建一个构建者对象
+            builder = new AlertDialog.Builder(this);
+            builder.setTitle(title).setMessage(msg).setCancelable(flag);
+        }
+        return builder;
+    }
+
+    /**
+     * 功能:取消警告对话框
+     */
+    protected void dismissAlertDialog(AlertDialog alertDialog){
+        if (alertDialog!=null){
+            //取消警告对话框
+            alertDialog.dismiss();
+        }
+    }
+    /**
+     * 功能 ：显示一个进度条对话框
+     */
+    protected void showProcessDialog(String title,String msg,boolean falg){
+        if(dialog==null){
+            dialog = new ProgressDialog(this);
+        }
+        dialog.setTitle(title);
+        dialog.setMessage(msg);
+        dialog.setCancelable(falg);
+        dialog.show();
+    }
+
+    /**
+     * 功能 ：取消一个进度条对话框
+     */
+    protected void dismissProcessDialog(){
+        if(dialog!=null){
+            dialog.dismiss();
+        }
+    }
+
 }

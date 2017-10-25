@@ -114,14 +114,14 @@ public class FragShopCarAdapter extends BaseAdapter {
     private void saveGood(int position)
     {
         presenter.saveGoodIds(shopCars.get(position).getGoodId());
-        presenter.saveShopCarIds(shopCars.get(position).getUserId());
+        presenter.saveShopCarIds(shopCars.get(position).getGoodId());
         presenter.changeMoney(1,500);
     }
 
     private void removeGood(int position)
     {
         presenter.removeGoodIds(shopCars.get(position).getGoodId());
-        presenter.removShopCarIds(shopCars.get(position).getUserId());
+        presenter.removShopCarIds(shopCars.get(position).getObjectId());
         presenter.changeMoney(1,-500);
     }
 

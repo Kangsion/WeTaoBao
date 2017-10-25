@@ -57,9 +57,9 @@ public class ActGoodsTypeAdapter extends BaseAdapter {
         }
         //设置数据
         GoodsType goodsType = goodsTypeList.get(position);
-        vh.textView.setText(goodsType.getTypeName());
+        vh.textView.setText(goodsType.getGoodsTypeName());
         Picasso.with(CustomApplcation.getInstance().context)
-                .load(goodsTypeList.get(position).getTypeImg())
+                .load(goodsType.getGoodsTypeImg().getUrl())
                 .into(vh.imageView);
         return convertView;
     }

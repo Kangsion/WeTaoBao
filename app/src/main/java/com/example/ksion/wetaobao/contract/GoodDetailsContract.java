@@ -1,5 +1,6 @@
 package com.example.ksion.wetaobao.contract;
 
+import android.content.Context;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -36,6 +37,8 @@ public class GoodDetailsContract {
          * activity的跳转
          */
         void jumpActivity();
+
+        Context getContext();
 
         /**
          * 跳转到登陆页面

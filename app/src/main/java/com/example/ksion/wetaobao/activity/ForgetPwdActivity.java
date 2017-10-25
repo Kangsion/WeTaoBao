@@ -1,5 +1,6 @@
 package com.example.ksion.wetaobao.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.View;
@@ -20,7 +21,7 @@ import com.example.ksion.wetaobao.util.ToastFactory;
 public class ForgetPwdActivity extends BaseActivity implements FragForPwdContract.FragforPwdView,
         View.OnClickListener{
 
-    //返回上一界面1231231
+    //返回上一界面
     ImageView mFragForgetTvBack;
     //帮助
     TextView mActForgetTvHelp;
@@ -38,10 +39,13 @@ public class ForgetPwdActivity extends BaseActivity implements FragForPwdContrac
     TextView mActForgetTvReset;
     private FragForPwdContract.FragforpwdPresenter presenter;
 
+    Context context;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_forget);
+        context=this;
         initView();
         new ActForPwdPresenterImpl(this);
         presenter.initData();
@@ -68,12 +72,17 @@ public class ForgetPwdActivity extends BaseActivity implements FragForPwdContrac
 
     @Override
     public void showLoadingDialog(String title, String msg, boolean flag) {
+         super.showProcessDialog(title,msg,flag);
+    }
 
+    @Override
+    public Context getContext() {
+        return context;
     }
 
     @Override
     public void canelLoadingDialog() {
-
+         super.dismissProcessDialog();
     }
 
     @Override

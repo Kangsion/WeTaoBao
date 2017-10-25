@@ -1,8 +1,8 @@
 package com.example.ksion.wetaobao.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -28,14 +28,17 @@ public class GoodsResultActivity extends BaseActivity implements GoodResultContr
     GridView mActGoodsResultGv;
     private GoodResultContract.GoodResultPresenter presenter;
 
+    Context context;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent=getIntent();
-        String typename=intent.getStringExtra("datas");
+        String typeId=intent.getStringExtra("datas");
         setContentView(R.layout.act_good_result);
         initView();
-        new ActGoodsResultPresenterImpl(this,typename);
+        context=this;
+        new ActGoodsResultPresenterImpl(this,typeId);
         presenter.initData();
     }
 
@@ -43,6 +46,9 @@ public class GoodsResultActivity extends BaseActivity implements GoodResultContr
         mActGoodsResultIvBack= (ImageView) findViewById(R.id.act_good_result_iv_back);
         mActGoodsResultTvMenu= (TextView) findViewById(R.id.act_good_result_tv_menu);
         mActGoodsResultGv= (GridView) findViewById(R.id.act_goods_result_gv);
+
+        mActGoodsResultIvBack.setOnClickListener(this);
+        mActGoodsResultTvMenu.setOnClickListener(this);
 
     }
 
@@ -54,6 +60,11 @@ public class GoodsResultActivity extends BaseActivity implements GoodResultContr
     @Override
     public void showLoadingDialog(String title, String msg, boolean flag) {
 
+    }
+
+    @Override
+    public Context getContext() {
+        return context;
     }
 
     @Override
@@ -92,6 +103,7 @@ public class GoodsResultActivity extends BaseActivity implements GoodResultContr
                  finish();
                  break;
              case R.id.act_good_result_tv_menu:
+                 showMsg("开发中。。");
                  break;
          }
     }

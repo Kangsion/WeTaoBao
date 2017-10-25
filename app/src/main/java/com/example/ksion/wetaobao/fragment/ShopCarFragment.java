@@ -18,10 +18,8 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.example.ksion.wetaobao.R;
 import com.example.ksion.wetaobao.activity.LoginActivity;
 import com.example.ksion.wetaobao.base.BaseFragment;
-import com.example.ksion.wetaobao.bean.ShopCar;
 import com.example.ksion.wetaobao.contract.FragShopcarContract;
-import com.example.ksion.wetaobao.gen.ShopCarDao;
-import com.example.ksion.wetaobao.manager.GreenDaoManager;
+
 import com.example.ksion.wetaobao.presenter.FragShopCarPresenterImpl;
 import com.example.ksion.wetaobao.util.ToastFactory;
 /**
@@ -47,14 +45,14 @@ public class ShopCarFragment extends BaseFragment implements FragShopcarContract
 
     private FragShopcarContract.FragShopcarPresenter presenter;
 
-    private Boolean isPrepared;
+    private Boolean isPrepared=false;
 
     protected void lazyLoad() {
-       if(!isPrepared||isVisible) {
+       if(!isPrepared) {
             return;
        }
            if (!isLogin()) {
-               startActivityForResult(new Intent(getContext(), LoginActivity.class), 500);
+               startActivityForResult(new Intent(getContext(), LoginActivity.class), 100);
            } else {
                setUserData();
            }
@@ -68,9 +66,6 @@ public class ShopCarFragment extends BaseFragment implements FragShopcarContract
     @Override
     public View initLayout(LayoutInflater inflater, ViewGroup container, boolean b) {
         View rootView=inflater.inflate(R.layout.frag_shopcar,null);
-        isPrepared=true;
-        lazyLoad();
-
         mFragShopCarMsg= (ImageView) rootView.findViewById(R.id.frag_shop_car_msg);
         mFragShopcarLv= (SwipeMenuListView) rootView.findViewById(R.id.frag_shopcar_lv);
         mFragShopCarCb= (CheckBox) rootView.findViewById(R.id.frag_shop_car_cb);
@@ -79,6 +74,8 @@ public class ShopCarFragment extends BaseFragment implements FragShopcarContract
         mFragShopcarLn= (RelativeLayout) rootView.findViewById(R.id.frag_shopcar_ln);
         mGnull= (LinearLayout) rootView.findViewById(R.id.frag_shopcar_notGood);
         new  FragShopCarPresenterImpl(this);
+        isPrepared=true;
+        lazyLoad();
         return rootView;
 
     }

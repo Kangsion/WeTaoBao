@@ -3,11 +3,16 @@ package com.example.ksion.wetaobao.presenter;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.ksion.wetaobao.base.BasePresenter;
+
 import com.example.ksion.wetaobao.bean.User;
 import com.example.ksion.wetaobao.contract.FragForPwdContract;
-import com.example.ksion.wetaobao.gen.UserDao;
-import com.example.ksion.wetaobao.manager.GreenDaoManager;
+
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.datatype.BmobQueryResult;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.SQLQueryListener;
+import cn.bmob.v3.listener.UpdateListener;
+
 
 /**
  * Created by Ksion on 2017/9/17.
@@ -19,7 +24,7 @@ public class ActForPwdPresenterImpl implements FragForPwdContract.FragforpwdPres
     private EditText mEtPhone, mEtCode, mEtPwd, mEtPwd2;
     private TextView mTvGetCode;
 
-    UserDao userDao;
+
 
     public ActForPwdPresenterImpl(FragForPwdContract.FragforPwdView view)
     {
@@ -35,7 +40,7 @@ public class ActForPwdPresenterImpl implements FragForPwdContract.FragforpwdPres
         mEtCode=view.getmActForgetEtSmsCode();
         mTvGetCode=view.getmActForgetTvGetcode();
 
-        userDao = GreenDaoManager.getInstance().getNewSession().getUserDao();
+
     }
 
     @Override
@@ -45,9 +50,9 @@ public class ActForPwdPresenterImpl implements FragForPwdContract.FragforpwdPres
 
     @Override
     public void reset() {
-        String phone=mEtPhone.getText().toString().trim();
-        String pwd=mEtPwd.getText().toString().trim();
-        String pwd2=mEtPwd2.getText().toString().trim();
+       String phone=mEtPhone.getText().toString().trim();
+        final String pwd=mEtPwd.getText().toString().trim();
+        final String pwd2=mEtPwd2.getText().toString().trim();
         if(phone.isEmpty()) {
             view.showMsg("手机号码不能为空");
         } else if (pwd.isEmpty()) {
@@ -55,19 +60,27 @@ public class ActForPwdPresenterImpl implements FragForPwdContract.FragforpwdPres
         } else if(pwd2.isEmpty()) {
             view.showMsg("重置密码不能为空");
         } else {
-            User findUser = userDao.queryBuilder().where(UserDao.Properties.Phone.eq(phone)).build().unique();
-            if (findUser != null) {
-                if (findUser.getPassword().equals(pwd)) {
-                    findUser.setPassword(pwd2);
-                    userDao.update(findUser);
-                    view.showMsg("密码修改成功");
-                    view.jumpActivity();
-                } else {
-                    view.showMsg("密码错误");
-                }
-            } else {
-                view.showMsg("用户不存在");
-            }
+            String sql="select * from User where pwd='"+phone+"'";
+            new BmobQuery<User>().doSQLQuery(view.getContext(), sql, new SQLQueryListener<User>() {
+                @Override
+                public void done(BmobQueryResult<User> bmobQueryResult, BmobException e) {
+                    if(!bmobQueryResult.getResults().isEmpty()) {
+                        User user = bmobQueryResult.getResults().get(0);
+                        if(pwd.equals(user.getPwd()))
+                        {
+                            user.setPwd(pwd2);
+                            user.update(view.getContext(), new UpdateListener() {
+                                @Override
+                                public void onSuccess() {
+                                    view.showMsg("密码修改成功");
+                                }
+
+                                @Override
+                                public void onFailure(int i, String s) {
+
+                                } });
+                        } }
+                } });
         }
     }
 

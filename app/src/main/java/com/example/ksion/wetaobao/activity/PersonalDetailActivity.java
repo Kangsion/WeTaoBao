@@ -74,6 +74,7 @@ public class PersonalDetailActivity extends BaseActivity implements PersonalDeta
         new ActPersonalDetailPresenterImpl(this);
         initView();
         presenter.initData();
+        mPhotoHelper = GetSimplePhotoHelper.getInstance(this);
     }
     private void initView() {
         mActPersonDetailsIvBack= (ImageView) findViewById(R.id.act_person_details_iv_back);
@@ -97,6 +98,7 @@ public class PersonalDetailActivity extends BaseActivity implements PersonalDeta
         mActPersonDetailsLnErcode.setOnClickListener(this);
         mActPersonDetailsLnHuiyuanName.setOnClickListener(this);
         mActPersonDetailsLnNickName.setOnClickListener(this);
+        mActPersonDetailsLnAddress.setOnClickListener(this);
     }
 
     @Override
@@ -131,7 +133,7 @@ public class PersonalDetailActivity extends BaseActivity implements PersonalDeta
 
     @Override
     public void canelLoadingDialog() {
-
+        alertDialog.dismiss();
     }
 
     @Override
@@ -186,7 +188,7 @@ public class PersonalDetailActivity extends BaseActivity implements PersonalDeta
                 showMsg("二维码不支持更改");
                 break;
             case R.id.act_person_details_ln_address://修改收货地址
-              //  startActivity(new Intent(this, AddressChangeActivity.class));
+                startActivity(new Intent(this, AddressChangeActivity.class));
                 break;
         }
     }
@@ -198,7 +200,7 @@ public class PersonalDetailActivity extends BaseActivity implements PersonalDeta
      * @param msg
      */
     void showMyDialog(final int type, String msg) {
-      /*  //获取一个警告对话框的builder对象
+        //获取一个警告对话框的builder对象
         builder = super.showAlertDialog(null, null, true);
         View v = LayoutInflater.from(this).inflate(R.layout.act_address_change_text, null);
         //设置弹出的布局
@@ -216,11 +218,11 @@ public class PersonalDetailActivity extends BaseActivity implements PersonalDeta
             @Override
             public void onClick(View v) {
                 //隐藏评论框
-                PersonalDetailActivity.this.(alertDialog);
+                PersonalDetailActivity.this.dismissAlertDialog(alertDialog);
                 String text = mDiscussEr.getText().toString();
                 presenter.updateUserInfo(text, type);
             }
-        });*/
+        });
     }
 
 

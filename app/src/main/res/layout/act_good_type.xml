@@ -52,6 +52,7 @@
             />
 
         <GridView
+            android:layout_marginTop="20dp"
             android:id="@+id/act_goods_type_gv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

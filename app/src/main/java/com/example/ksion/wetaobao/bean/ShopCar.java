@@ -9,44 +9,41 @@ import org.greenrobot.greendao.annotation.Id;
 import java.util.List;
 import org.greenrobot.greendao.annotation.Generated;
 
+import cn.bmob.v3.BmobObject;
+
 /**
  * Created by Ksion on 2017/9/13.
  */
-@Entity
-public class ShopCar {
+
+public class ShopCar extends BmobObject{
     //商品id
     private String goodId;
     //当前用户
-    @Id
-    private String userId;
+    private String phone;
     //商品的数量
     private int count;
-    @Generated(hash = 1164107597)
-    public ShopCar(String goodId, String userId, int count) {
-        this.goodId = goodId;
-        this.userId = userId;
-        this.count = count;
-    }
-    @Generated(hash = 1637372148)
-    public ShopCar() {
-    }
+
     public String getGoodId() {
-        return this.goodId;
+        return goodId;
     }
+
     public void setGoodId(String goodId) {
         this.goodId = goodId;
     }
-    public String getUserId() {
-        return this.userId;
+
+    public String getPhone() {
+        return phone;
     }
-    public void setUserId(String userId) {
-        this.userId = userId;
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
+
     public int getCount() {
-        return this.count;
+        return count;
     }
+
     public void setCount(int count) {
         this.count = count;
     }
-
 }

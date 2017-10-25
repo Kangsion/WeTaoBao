@@ -1,81 +1,75 @@
 package com.example.ksion.wetaobao.bean;
 
-import com.example.ksion.wetaobao.util.StringConverter;
 
-import org.greenrobot.greendao.annotation.Convert;
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
-import org.greenrobot.greendao.annotation.Generated;
+
+import cn.bmob.v3.BmobObject;
 
 /**
  * Created by Ksion on 2017/9/13.
  */
-@Entity
-public class Order {
-    //订单编号
-    @Id
-    private String OrderId;
+
+public class Order  extends BmobObject{
+    //订单Id
+    private String orderId;
     //商品id的集合
-    @Convert(columnType = String.class, converter = StringConverter.class)
-    private List<String> goodIds;
+    private String goodId;
     //用户id
-    @NotNull
-    private String userId;
+    private String phone;
     //订单状态 0为待付款 1为待发货 2为待收货3位取消订单
     private int ordersState;
     //订单的金额
     private double oerdersMoney;
     //订单商品的数量
     private int goodsCount;
-    @Generated(hash = 582971988)
-    public Order(String OrderId, List<String> goodIds, @NotNull String userId,
-            int ordersState, double oerdersMoney, int goodsCount) {
-        this.OrderId = OrderId;
-        this.goodIds = goodIds;
-        this.userId = userId;
-        this.ordersState = ordersState;
-        this.oerdersMoney = oerdersMoney;
-        this.goodsCount = goodsCount;
+
+    public String getGoodId() {
+        return goodId;
     }
-    @Generated(hash = 1105174599)
-    public Order() {
-    }
+
     public String getOrderId() {
-        return this.OrderId;
+        return orderId;
     }
-    public void setOrderId(String OrderId) {
-        this.OrderId = OrderId;
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
-    public List<String> getGoodIds() {
-        return this.goodIds;
+
+    public void setGoodId(String goodId) {
+        this.goodId = goodId;
+
     }
-    public void setGoodIds(List<String> goodIds) {
-        this.goodIds = goodIds;
+
+    public String getPhone() {
+        return phone;
     }
-    public String getUserId() {
-        return this.userId;
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
+
     public int getOrdersState() {
-        return this.ordersState;
+        return ordersState;
     }
+
     public void setOrdersState(int ordersState) {
         this.ordersState = ordersState;
     }
+
     public double getOerdersMoney() {
-        return this.oerdersMoney;
+        return oerdersMoney;
     }
+
     public void setOerdersMoney(double oerdersMoney) {
         this.oerdersMoney = oerdersMoney;
     }
+
     public int getGoodsCount() {
-        return this.goodsCount;
+        return goodsCount;
     }
+
     public void setGoodsCount(int goodsCount) {
         this.goodsCount = goodsCount;
     }

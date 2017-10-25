@@ -4,11 +4,17 @@ import android.app.Application;
 import android.content.Context;
 
 import com.example.ksion.wetaobao.bean.User;
+import com.example.ksion.wetaobao.config.Contracts;
 
 
 import java.util.HashMap;
 import java.util.Map;
 
+import c.b.BP;
+import cn.bmob.v3.Bmob;
+
+import cn.bmob.v3.BmobSMS;
+import cn.bmob.v3.update.BmobUpdateAgent;
 
 
 /**
@@ -49,7 +55,7 @@ public class CustomApplcation extends Application {
      *
      * @return
      */
-    public User getCurrentUser() {
+    public  User getCurrentUser() {
         User user = currentUser;
         if (user != null) {
             return user;
@@ -74,13 +80,13 @@ public class CustomApplcation extends Application {
         //由于Application类本身已经单例，所以直接按以下处理即可。
         customApplcation = this;
         context = getApplicationContext();
-       /* //初始化BMob 短信服务SDK
-        BmobSMS.initialize(context, Contracts.BMOB_APP_KEY);
+         //初始化BMob 短信服务SDK
+        //BmobSMS.querySmsState(context, Contracts.BMOB_APP_KEY);
         //初始化BMob 数据SDK
-        Bmob.initialize(this,Contracts.BMOB_APP_KEY);*/
+        Bmob.initialize(this,Contracts.BMOB_APP_KEY);
         //初始化Bmob 支付SDK
-       // BP.init(context,Contracts.BMOB_APP_KEY);
+        BP.init(context,Contracts.BMOB_APP_KEY);
         //Bmob自动更新
-//        BmobUpdateAgent.initAppVersion();
+        BmobUpdateAgent.initAppVersion(context);
     }
 }

@@ -53,13 +53,13 @@ public interface Contracts {
             "locate=icon-10&spm=a215s.7406091.icons.10&scm=2027.1.2.1005&_s_nx_orange_key=catmap";
 
     //Bmob云APP_Key
-    String BMOB_APP_KEY = "4704a65c576098ab3ab4392300f60e11";
+    String BMOB_APP_KEY = "589fb2e4bac6f9e59aed8c8bdd67b1ae";
 
     //微信分享key
     String WX_APP_ID = "wxb9b8271eea5609b0";
 
     //默认头像的地址
-    String DEFALT_HEAD_URL = "http://bmob-cdn-6590.b0.upaiyun.com/2016/10/16/22901ee0406f7af280b56a1b5d555f58.png";
+    String DEFALT_HEAD_URL = "http://touxiang.qqzhi.com/uploads/2012-11/1111032914710.jpg";
 
     //照相
     int TAKE_PHOTO = 1000;

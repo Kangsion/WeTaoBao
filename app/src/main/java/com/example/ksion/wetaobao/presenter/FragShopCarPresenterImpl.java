@@ -18,8 +18,6 @@ import com.example.ksion.wetaobao.R;
 import com.example.ksion.wetaobao.adapter.FragShopCarAdapter;
 import com.example.ksion.wetaobao.bean.ShopCar;
 import com.example.ksion.wetaobao.contract.FragShopcarContract;
-import com.example.ksion.wetaobao.gen.ShopCarDao;
-import com.example.ksion.wetaobao.manager.GreenDaoManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -47,7 +45,6 @@ public class FragShopCarPresenterImpl implements FragShopcarContract.FragShopcar
 
     private LinearLayout mGnull;
 
-    ShopCarDao shopCarDao;
 
     public FragShopCarPresenterImpl(FragShopcarContract.FragShopcarView view)
     {
@@ -57,15 +54,13 @@ public class FragShopCarPresenterImpl implements FragShopcarContract.FragShopcar
 
     @Override
     public void initData() {
-        shopCarDao= GreenDaoManager.getInstance().getNewSession().getShopCarDao();
+
          mGnull=view.getmGnull();
          mLv=view.getmFragShopcarLv();
          mCb=view.getmFragShopCarCb();
          mTvMoney=view.getmFragShopCarTvMoney();
          mFragShopcarLn=view.getmFragShopcarLn();
         if(CustomApplcation.getInstance().getCurrentUser()!=null) {
-            listShopCas = shopCarDao.queryBuilder().where(ShopCarDao.Properties.UserId.eq
-                    (CustomApplcation.getInstance().getCurrentUser().getUserId())).build().list();
             if (listShopCas != null) {
                 //设置适配器
                 HashMap<Integer, Boolean> isChecked = new HashMap<>();

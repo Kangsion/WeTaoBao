@@ -35,6 +35,8 @@ public  class IhomeContract {
 
         MarqueeView getMarqueeViewTop();
 
+        GridView getGridViewGoodList();
+
         /**
          * 获取显示广告的ViewPager
          *

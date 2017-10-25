@@ -18,19 +18,20 @@ import java.util.zip.Inflater;
 
 public class GoodRollPageViewAdapter extends StaticPagerAdapter {
     //数据源
-    List<ImageView> imgs;
+    List<String> imgs;
     //上下文对象
     Context context;
 
-     public GoodRollPageViewAdapter(List<ImageView> imgs)
+     public GoodRollPageViewAdapter(Context context,List<String> imgs)
      {
+         this.context=context;
          this.imgs=imgs;
      }
 
     @Override
     public View getView(ViewGroup container, int position) {
         ImageView view=new ImageView(container.getContext());
-        Picasso.with(context).load(imgs.get(position).getId()).into(view);
+        Picasso.with(context).load(imgs.get(position)).into(view);
         view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
         return view;

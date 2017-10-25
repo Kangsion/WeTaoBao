@@ -1,5 +1,6 @@
 package com.example.ksion.wetaobao.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -27,7 +28,7 @@ public class GoodsDetailsActivity extends BaseActivity implements GoodDetailsCon
 
     ImageView mActGoodsDetailsIvBack;
 
-    TextView mActGoodsDetailsTvMenu;
+    ImageView mActGoodsDetailsIvShopCar;
 
     RollPagerView mActGoodsDetailsRollVpAd;
 
@@ -50,11 +51,14 @@ public class GoodsDetailsActivity extends BaseActivity implements GoodDetailsCon
     Button mActGoodsDetailsBtnGoumai;
     private GoodDetailsContract.GoodDetailsPresenter presenter;
 
+    Context context;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_good_details);
         initView();
+        context=this;
         new ActGoodsDetailsPresenterImpl(this);
         presenter.initData();
     }
@@ -69,12 +73,14 @@ public class GoodsDetailsActivity extends BaseActivity implements GoodDetailsCon
         mActGoodsDetailsIvBack= (ImageView) findViewById(R.id.act_good_details_iv_back);
         mActGoodsDetailsRollVpAd= (RollPagerView) findViewById(R.id.act_goods_details_roll_vp_ad);
         mActGoodsDetailsTvGoodsName= (TextView) findViewById(R.id.act_goods_details_tv_goods_name);
-        mActGoodsDetailsTvMenu= (TextView) findViewById(R.id.act_good_details_tv_menu);
+        mActGoodsDetailsIvShopCar= (ImageView) findViewById(R.id.act_good_details_iv_shopcar);
         mActGoodsDetailsTvMoney= (TextView) findViewById(R.id.act_goods_details_tv_money);
         mActGoodsDetailsXlv= (XListView) findViewById(R.id.act_goods_details_xlv);
 
+        mActGoodsDetailsIvBack.setOnClickListener(this);
         mActGoodsDetailsBtnGoumai.setOnClickListener(this);
         mActGoodsDetailsBtnJiaru.setOnClickListener(this);
+        mActGoodsDetailsIvShopCar.setOnClickListener(this);
     }
 
     @Override
@@ -98,6 +104,11 @@ public class GoodsDetailsActivity extends BaseActivity implements GoodDetailsCon
     }
 
     @Override
+    public Context getContext() {
+        return context;
+    }
+
+    @Override
     public void jumpLogin() {
         startActivity(new Intent(this, LoginActivity.class));
     }
@@ -114,7 +125,7 @@ public class GoodsDetailsActivity extends BaseActivity implements GoodDetailsCon
 
     @Override
     public XListView getmActGoodsDetailsXlv() {
-        return getmActGoodsDetailsXlv();
+        return mActGoodsDetailsXlv;
     }
 
     @Override
@@ -139,7 +150,10 @@ public class GoodsDetailsActivity extends BaseActivity implements GoodDetailsCon
             case R.id.act_good_details_iv_back:
                 finish();
                 break;
-            case R.id.act_good_details_tv_menu:
+            case R.id.act_good_details_iv_shopcar:
+                Intent intent=new Intent(GoodsDetailsActivity.this,HomeActivity.class);
+                intent.putExtra("ShopCar",3);
+                startActivity(intent);
                 break;
             case R.id.act_goods_details_btn_share:
                 break;

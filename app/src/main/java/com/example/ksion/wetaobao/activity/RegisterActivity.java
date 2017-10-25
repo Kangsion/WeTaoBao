@@ -1,5 +1,6 @@
 package com.example.ksion.wetaobao.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.View;
@@ -38,12 +39,15 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.R
     TextView mActRegTvReg;
 
     ImageView mFragRegisterTvBack;
+
+    Context context;
     private RegisterContract.RegisterPresenter presenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_register);
+        context=this;
         initView();
         new ActRegisterPresentImpl(this);
         presenter.initData();
@@ -95,18 +99,23 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.R
     }
 
     @Override
+    public Context getContext() {
+        return context;
+    }
+
+    @Override
     public void showMsg(String msg) {
         ToastFactory.getToast(this,msg).show();
     }
 
     @Override
     public void showLoadingDialog(String title, String msg, boolean flag) {
-
+          super.showProcessDialog(title,msg,flag);
     }
 
     @Override
     public void canelLoadingDialog() {
-
+          super.dismissProcessDialog();
     }
 
     @Override

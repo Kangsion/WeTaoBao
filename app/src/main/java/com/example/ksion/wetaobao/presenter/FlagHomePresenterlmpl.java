@@ -11,6 +11,7 @@ import com.example.ksion.wetaobao.Application.CustomApplcation;
 import com.example.ksion.wetaobao.R;
 import com.example.ksion.wetaobao.adapter.AdRollPageAdapter;
 import com.example.ksion.wetaobao.adapter.ContentGridViewAdapter;
+import com.example.ksion.wetaobao.adapter.GoodListAdapter;
 import com.example.ksion.wetaobao.adapter.SortGridViewAdapter;
 import com.example.ksion.wetaobao.contract.IhomeContract;
 import com.jude.rollviewpager.RollPagerView;
@@ -46,6 +47,12 @@ public class FlagHomePresenterlmpl  implements IhomeContract.IHomePresenter {
     private AdRollPageAdapter mAdadapter;
     private RollPagerView rollPagerViewAd;
     private EditText editText;
+    private GridView mGridViewGoodList;
+    //商品列表
+    private Integer [] goodImgs;
+    private String [] goodNames;
+    private double [] prices;
+    private Integer [] number;
 
     public FlagHomePresenterlmpl(IhomeContract.IHomeView view)
     {
@@ -61,6 +68,7 @@ public class FlagHomePresenterlmpl  implements IhomeContract.IHomePresenter {
         mGridViewContent=mView.getGridViewContent();
         marqueeViewTop=mView.getMarqueeViewTop();
         editText=mView.getmFragHomeEtSearch();
+        mGridViewGoodList=mView.getGridViewGoodList();
 
         imgs=new ArrayList<>();
         //加入轮播图片
@@ -90,17 +98,30 @@ public class FlagHomePresenterlmpl  implements IhomeContract.IHomePresenter {
 
         //此处数据，应该为从网络上获取
         List<String> info = new ArrayList<>();
-        info.add("1. 大家好，我是C陈志广。");
-        info.add("2. 这是我的二期项目！");
-        info.add("3. GitHub帐号：mmengchen");
+        info.add("1.IPhone E 登场");
+        info.add("2. 今年流行奶奶衣");
+        info.add("3. 最新款鞋子");
         info.add("4. 淘宝双11.11");
-        info.add("5. 个人博客");
-        info.add("6. 消息进行测试");
+        info.add("5. 三星S8");
+        info.add("6. 超级廉价衣服");
         //启动滚动
         marqueeViewTop.startWithList(info);
 
         mGridViewContent.setAdapter(new ContentGridViewAdapter(CustomApplcation.getInstance().context,
             contentIcoImgs,contentImgs,contentText,contentText2,R.layout.frag_home_gv_goods_item));
+
+        goodImgs=new Integer[] {R.drawable.bookbag,R.drawable.bookbag,R.drawable.bookbag,R.drawable.bookbag,
+                R.drawable.bookbag};
+
+        goodNames=new String[] {"萨达撒","我的二手","是的萨","sdwew","少嘚瑟","5454"};
+
+        number= new Integer[] {545,659,5426,4214,5842};
+
+        prices=new double [] {45.15,19.24,15.69,14.54,89.65};
+
+
+        mGridViewGoodList.setAdapter(new GoodListAdapter(CustomApplcation.getInstance().context,
+                goodImgs,goodNames,prices,number));
 
         initEvent();
     }

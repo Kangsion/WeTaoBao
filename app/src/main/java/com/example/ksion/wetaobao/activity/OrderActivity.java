@@ -148,14 +148,14 @@ public class OrderActivity extends BaseActivity  implements OrderContract.OrderV
     @Override
     public void setData(Goods goods) {
         //设置收货人
-        mActOrderTvShouhuoName.setText(CustomApplcation.getInstance().getCurrentUser().getNickName());
+        mActOrderTvShouhuoName.setText(CustomApplcation.getInstance().getCurrentUser().getUserName());
         //设置默认收货地址
         mActOrderTvShouhuoAddress.setText("收货地址："+CustomApplcation.getInstance().getCurrentUser().
                 getAddressLists());
         //设置电话号码(默认为注册时的电话号码)
         mActOrderTvShouhuoPhone.setText(CustomApplcation.getInstance().getCurrentUser().getPhone()+"");
         //设置商品图片(默认为第一张图片)
-        Picasso.with(this).load(goods.getGoodsImgs()).into(mActOrderIvGoodsImg);
+        //Picasso.with(this).load(goods.getGoodsImgs()).into(mActOrderIvGoodsImg);
         //设置商品标题
         mActOrderTvGoodsName.setText(goods.getGoodsName());
         //设置价格

@@ -1,90 +1,113 @@
 package com.example.ksion.wetaobao.bean;
 
-import android.widget.ImageView;
 
-import com.example.ksion.wetaobao.util.StringConverter;
-
-import org.greenrobot.greendao.annotation.Convert;
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.NotNull;
-
+import java.util.ArrayList;
 import java.util.List;
-import org.greenrobot.greendao.annotation.Generated;
-import org.greenrobot.greendao.annotation.Property;
+
+import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.datatype.BmobFile;
+
 
 /**
  * Created by Ksion on 2017/9/12.
  */
-@Entity
-public class Goods {
+
+public class Goods extends BmobObject {
+    //商品id
+    private String goodId;
     //商品名称
-    @NotNull
     private String goodsName;
     //商品类别id
-    @Property(nameInDb = "GOODS_TYPE_ID")
     private String goodsTypeId;
     //商品的图片
-    private int  goodsImgs;
+    private BmobFile goodsImgs;
     //商品的价格
-    private double goodsPrice;
+    private Number goodsPrice;
     //商品的发货地址
     private String goodsAddress;
-    //收藏商品的人
-    @Convert(columnType = String.class, converter = StringConverter.class)
-    private List<String> loveUserIds;
-    @Generated(hash = 1463531467)
-    public Goods(@NotNull String goodsName, String goodsTypeId, int goodsImgs,
-            double goodsPrice, String goodsAddress, List<String> loveUserIds) {
-        this.goodsName = goodsName;
-        this.goodsTypeId = goodsTypeId;
+    //商品简介
+    private String goodsBrief;
+    //月销量
+    private Integer xiaoliang;
+
+    public BmobFile getGoodsImgs() {
+        return goodsImgs;
+    }
+
+    public void setGoodsImgs(BmobFile goodsImgs) {
         this.goodsImgs = goodsImgs;
+    }
+
+    public void setGoodsPrice(Number goodsPrice) {
         this.goodsPrice = goodsPrice;
-        this.goodsAddress = goodsAddress;
-        this.loveUserIds = loveUserIds;
     }
-    @Generated(hash = 1770709345)
-    public Goods() {
+
+    public String getGoodsBrief() {
+        return goodsBrief;
     }
+
+    public void setGoodsBrief(String goodsBrief) {
+        this.goodsBrief = goodsBrief;
+    }
+
+    public Integer getXiaoliang() {
+        return xiaoliang;
+    }
+
+    public void setXiaoliang(Integer xiaoliang) {
+        this.xiaoliang = xiaoliang;
+    }
+
     public String getGoodsName() {
-        return this.goodsName;
+        return goodsName;
     }
+
     public void setGoodsName(String goodsName) {
         this.goodsName = goodsName;
     }
+
     public String getGoodsTypeId() {
-        return this.goodsTypeId;
+        return goodsTypeId;
     }
+
     public void setGoodsTypeId(String goodsTypeId) {
         this.goodsTypeId = goodsTypeId;
     }
-    public int getGoodsImgs() {
-        return this.goodsImgs;
+
+
+    public String getGoodId() {
+        return goodId;
     }
-    public void setGoodsImgs(int goodsImgs) {
-        this.goodsImgs = goodsImgs;
+
+    public void setGoodId(String goodId) {
+        this.goodId = goodId;
     }
-    public double getGoodsPrice() {
-        return this.goodsPrice;
+
+
+    public Number getGoodsPrice() {
+        return goodsPrice;
     }
+
     public void setGoodsPrice(double goodsPrice) {
         this.goodsPrice = goodsPrice;
     }
+
     public String getGoodsAddress() {
-        return this.goodsAddress;
+        return goodsAddress;
     }
+
     public void setGoodsAddress(String goodsAddress) {
         this.goodsAddress = goodsAddress;
     }
-    public List<String> getLoveUserIds() {
-        return this.loveUserIds;
+
+    @Override
+    public String toString() {
+        return "Goods{" +
+                "goodsName='" + goodsName + '\'' +
+                ", goodsTypeId='" + goodsTypeId + '\'' +
+                ", goodsImgs=" + goodsImgs +
+                ", goodsPrice=" + goodsPrice +
+                ", goodsAddress='" + goodsAddress + '\'' +
+                '}';
     }
-    public void setLoveUserIds(List<String> loveUserIds) {
-        this.loveUserIds = loveUserIds;
-    }
-
-
-
-
-
 }
