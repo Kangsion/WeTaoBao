@@ -20,7 +20,7 @@ import com.example.ksion.wetaobao.util.ToastFactory;
 public class ForgetPwdActivity extends BaseActivity implements FragForPwdContract.FragforPwdView,
         View.OnClickListener{
 
-    //返回上一界面
+    //返回上一界面1231231
     ImageView mFragForgetTvBack;
     //帮助
     TextView mActForgetTvHelp;
