@@ -1,5 +1,6 @@
 package com.example.ksion.wetaobao.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -138,10 +139,10 @@ public class OrderActivity extends BaseActivity  implements OrderContract.OrderV
     @Override
     public void jumpActivity(String orderId, double sum) {
         //跳转到支付
-        Intent intent = new Intent(this,PayActivity.class);
+        Intent intent = new Intent(this,HomeActivity.class);
         //将订单编号和订单金额出传递到下一个activity
-        intent.putExtra("orderId",orderId);
-        intent.putExtra("sumMoney",sum);
+       /* intent.putExtra("orderId",orderId);
+        intent.putExtra("sumMoney",sum);*/
         startActivity(intent);
     }
 
@@ -155,7 +156,7 @@ public class OrderActivity extends BaseActivity  implements OrderContract.OrderV
         //设置电话号码(默认为注册时的电话号码)
         mActOrderTvShouhuoPhone.setText(CustomApplcation.getInstance().getCurrentUser().getPhone()+"");
         //设置商品图片(默认为第一张图片)
-        //Picasso.with(this).load(goods.getGoodsImgs()).into(mActOrderIvGoodsImg);
+        Picasso.with(this).load(goods.getGoodsImgs().getUrl()).into(mActOrderIvGoodsImg);
         //设置商品标题
         mActOrderTvGoodsName.setText(goods.getGoodsName());
         //设置价格
@@ -179,6 +180,11 @@ public class OrderActivity extends BaseActivity  implements OrderContract.OrderV
     @Override
     public TextView getmActOrderTvGoodsMoney() {
         return mActOrderTvGoodsMoney;
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
     }
 
     @Override

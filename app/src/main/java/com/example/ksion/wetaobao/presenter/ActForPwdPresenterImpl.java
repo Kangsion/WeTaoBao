@@ -40,7 +40,6 @@ public class ActForPwdPresenterImpl implements FragForPwdContract.FragforpwdPres
         mEtCode=view.getmActForgetEtSmsCode();
         mTvGetCode=view.getmActForgetTvGetcode();
 
-
     }
 
     @Override
@@ -77,7 +76,7 @@ public class ActForPwdPresenterImpl implements FragForPwdContract.FragforpwdPres
 
                                 @Override
                                 public void onFailure(int i, String s) {
-
+                                   view.showMsg("密码修改失败"+s);
                                 } });
                         } }
                 } });

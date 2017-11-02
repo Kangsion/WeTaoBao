@@ -11,7 +11,7 @@ import com.example.ksion.wetaobao.base.BaseView;
  */
 
 public class FragAskContract  {
-    public interface IFragAskView extends BaseView<IFragPresenter>{
+    public interface IFragAskView extends BaseView<IFragAskPresenter>{
         /**
          * 获取当前Fragment中的viewpager
          * @return
@@ -24,5 +24,5 @@ public class FragAskContract  {
          */
         FragmentManager getManager();
     }
-    public  interface IFragPresenter extends BasePresenter<IFragAskView>{}
+    public  interface IFragAskPresenter extends BasePresenter<IFragAskView>{}
 }

@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="K:\AndroidWorkSpace\WeTaobao\iOS_Dialog_Library\src\main\jniLibs"/></dataSet><dataSet config="release"><source path="K:\AndroidWorkSpace\WeTaobao\iOS_Dialog_Library\src\release\jniLibs"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="F:\warehouse\WeTaoBao\iOS_Dialog_Library\src\main\jniLibs"/></dataSet><dataSet config="release"><source path="F:\warehouse\WeTaoBao\iOS_Dialog_Library\src\release\jniLibs"/></dataSet></merger>

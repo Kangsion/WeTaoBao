@@ -1,13 +1,6 @@
 package com.example.ksion.wetaobao.bean;
 
-import com.example.ksion.wetaobao.util.StringConverter;
 
-import org.greenrobot.greendao.annotation.Convert;
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
-
-import java.util.List;
-import org.greenrobot.greendao.annotation.Generated;
 
 import cn.bmob.v3.BmobObject;
 
@@ -21,7 +14,7 @@ public class ShopCar extends BmobObject{
     //当前用户
     private String phone;
     //商品的数量
-    private int count;
+    private Integer count;
 
     public String getGoodId() {
         return goodId;
@@ -43,7 +36,7 @@ public class ShopCar extends BmobObject{
         return count;
     }
 
-    public void setCount(int count) {
+    public void setCount(Integer count) {
         this.count = count;
     }
 }

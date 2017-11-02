@@ -1,5 +1,6 @@
 package com.example.ksion.wetaobao.contract;
 
+import android.content.Context;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -24,6 +25,9 @@ public class FragShopcarContract {
         LinearLayout getmGnull();
 
         RelativeLayout getmFragShopcarLn();
+
+
+        Context getShopCarContext();
 
         /**
          * Toast数据

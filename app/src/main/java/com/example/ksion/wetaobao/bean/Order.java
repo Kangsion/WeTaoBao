@@ -19,11 +19,11 @@ public class Order  extends BmobObject{
     //用户id
     private String phone;
     //订单状态 0为待付款 1为待发货 2为待收货3位取消订单
-    private int ordersState;
+    private Integer ordersState;
     //订单的金额
-    private double oerdersMoney;
+    private Number ordersMoney;
     //订单商品的数量
-    private int goodsCount;
+    private Integer goodsCount;
 
     public String getGoodId() {
         return goodId;
@@ -58,12 +58,12 @@ public class Order  extends BmobObject{
         this.ordersState = ordersState;
     }
 
-    public double getOerdersMoney() {
-        return oerdersMoney;
+    public Number getOerdersMoney() {
+        return ordersMoney;
     }
 
-    public void setOerdersMoney(double oerdersMoney) {
-        this.oerdersMoney = oerdersMoney;
+    public void setOerdersMoney(Number oerdersMoney) {
+        this.ordersMoney = oerdersMoney;
     }
 
     public int getGoodsCount() {

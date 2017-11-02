@@ -4,8 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -123,43 +121,11 @@
                 android:textColor="@color/colorFont"
                 android:textSize="18sp" />
 
-            <com.example.ksion.wetaobao.widget.XListView
+            <ListView
                 android:id="@+id/act_goods_details_xlv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp" />
-
-            <TextView
-                android:layout_marginTop="50dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="21334234234324213123123213123" />
-
-            <TextView
-                android:layout_marginTop="50dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="21334234234324213123123213123" />
-
-            <TextView
-                android:layout_marginTop="50dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="21334234234324213123123213123" />
-
-            <TextView
-                android:layout_marginTop="50dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="21334234234324213123123213123" />
-
-            <TextView
-                android:layout_marginTop="50dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="21334234234324213123123213123" />
-
-
         </LinearLayout>
 
 

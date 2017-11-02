@@ -7,6 +7,7 @@ import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.ksion.wetaobao.R;
@@ -38,7 +39,7 @@ public class GoodsDetailsActivity extends BaseActivity implements GoodDetailsCon
 
     TextView mActGoodsDetailsTvMoney;
 
-    XListView mActGoodsDetailsXlv;
+    ListView mActGoodsDetailsXlv;
 
     Button mActGoodsDetailsBtnKefu;
 
@@ -75,7 +76,7 @@ public class GoodsDetailsActivity extends BaseActivity implements GoodDetailsCon
         mActGoodsDetailsTvGoodsName= (TextView) findViewById(R.id.act_goods_details_tv_goods_name);
         mActGoodsDetailsIvShopCar= (ImageView) findViewById(R.id.act_good_details_iv_shopcar);
         mActGoodsDetailsTvMoney= (TextView) findViewById(R.id.act_goods_details_tv_money);
-        mActGoodsDetailsXlv= (XListView) findViewById(R.id.act_goods_details_xlv);
+        mActGoodsDetailsXlv= (ListView) findViewById(R.id.act_goods_details_xlv);
 
         mActGoodsDetailsIvBack.setOnClickListener(this);
         mActGoodsDetailsBtnGoumai.setOnClickListener(this);
@@ -124,7 +125,7 @@ public class GoodsDetailsActivity extends BaseActivity implements GoodDetailsCon
     }
 
     @Override
-    public XListView getmActGoodsDetailsXlv() {
+    public ListView getmActGoodsDetailsXlv() {
         return mActGoodsDetailsXlv;
     }
 
@@ -164,9 +165,11 @@ public class GoodsDetailsActivity extends BaseActivity implements GoodDetailsCon
             case R.id.act_goods_details_btn_shoucang://收藏按钮被点击时,暂时不使用
                 break;
             case R.id.act_goods_details_btn_jiaru://加入购物车
-
+                if(isLogin()) {
                     presenter.joinShopCar();
-
+                } else {
+                    jumpLogin();
+                }
                 break;
             case R.id.act_goods_details_btn_goumai://购买
                 if (isLogin()) {

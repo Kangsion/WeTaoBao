@@ -29,7 +29,6 @@ public abstract class BaseFragment extends Fragment{
     private AlertDialog alertDialog;
     private ProgressDialog dialog;
 
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if(contentView==null)
@@ -44,7 +43,7 @@ public abstract class BaseFragment extends Fragment{
 
     }
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         //初始化数据
         initData(savedInstanceState);
@@ -62,13 +61,12 @@ public abstract class BaseFragment extends Fragment{
     /**
      * 初始化数据,当ViewCreate被创建是调用此方法
      */
-    protected abstract void initData(@Nullable Bundle savedInstanceState);
+    protected abstract void initData(Bundle savedInstanceState);
 
     protected boolean isLogin() {
         if (CustomApplcation.getInstance().getCurrentUser() == null) {
             return false;
         }
-        // CustomApplcation.getInstance().setCurrentUser(BmobUser.getCurrentUser(User.class));
         return true;
     }
     @Override
@@ -77,19 +75,14 @@ public abstract class BaseFragment extends Fragment{
 
         if (getUserVisibleHint()) {
             isVisible = true;
-            onVisible();
+
         } else {
             isVisible = false;
             onInvisible();
         }
     }
 
-    /**
-     * 可见
-     */
-    protected void onVisible() {
-        lazyLoad();
-    }
+
 
 
     /**
@@ -100,11 +93,7 @@ public abstract class BaseFragment extends Fragment{
     }
 
 
-    /**
-     * 延迟加载
-     * 子类必须重写此方法
-     */
-    protected abstract void lazyLoad();
+
 
     @Override
     public final void onDestroyView() {

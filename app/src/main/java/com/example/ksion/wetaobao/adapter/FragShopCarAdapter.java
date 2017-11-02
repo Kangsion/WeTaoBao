@@ -12,12 +12,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ksion.wetaobao.R;
+import com.example.ksion.wetaobao.bean.Goods;
 import com.example.ksion.wetaobao.bean.ShopCar;
 import com.example.ksion.wetaobao.contract.FragShopcarContract;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.List;
+
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.datatype.BmobQueryResult;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.SQLQueryListener;
 
 /**
  * Created by Ksion on 2017/9/14.
@@ -34,15 +40,14 @@ public class FragShopCarAdapter extends BaseAdapter {
 
     private Context context;
 
-    public FragShopCarAdapter(Context context,List<ShopCar>shopCars,FragShopcarContract.
-            FragShopcarPresenter presenter)
+    public FragShopCarAdapter(Context context, List<ShopCar>shopCars, FragShopcarContract.FragShopcarPresenter presenter)
     {
         this.context=context;
         inflater=LayoutInflater.from(context);
         this.shopCars=shopCars;
         this.presenter=presenter;
 
-        initData();
+
     }
 
     @Override
@@ -81,56 +86,69 @@ public class FragShopCarAdapter extends BaseAdapter {
 
           final ViewHolder finalViewHolder=viewHolder;
           //设置商品ID
-           initDatas(finalViewHolder,shopCars.get(position).getGoodId(),position);
+           initDatas(finalViewHolder,shopCars.get(position).getGoodId(),position,shopCars.get(position).getCount());
           //设置商品数量
            finalViewHolder.mTvCount.setText(shopCars.get(position).getCount()+"");
         return convertView;
     }
 
-    private void initDatas(final ViewHolder holder, final String goodId, final int position) {
+    private void initDatas(final ViewHolder holder, final String goodId, final int position,final int count) {
         if(holder!=null) {
-            Picasso.with(context).load(R.drawable.bookbag).into(holder.mIvGoodsImg);
-            holder.mTvPrice.setText("￥" + 500);
-            holder.mTvGoodName.setText("超级无敌书包");
-            holder.mTvCount.setText("1");
-            holder.mcb.setChecked(isSelected.get(position));
-            holder.mcb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if(isChecked)
-                    {
-                        saveGood(position);
-                    }else{
-                        removeGood(position);
-                    }
 
+            String sql="select * from Goods where goodId='"+goodId+"'";
+            new BmobQuery<Goods>().doSQLQuery(context,sql, new SQLQueryListener<Goods>() {
+
+                @Override
+                public void done(BmobQueryResult<Goods> bmobQueryResult, BmobException e) {
+                    if(!bmobQueryResult.getResults().isEmpty()) {
+                        final Goods  good =bmobQueryResult.getResults().get(0);
+                        Picasso.with(context).load(good.getGoodsImgs().getUrl()).into(holder.mIvGoodsImg);
+                        holder.mTvPrice.setText("￥" + good.getGoodsPrice());
+                        holder.mTvGoodName.setText(good.getGoodsName());
+                        holder.mTvCount.setText(count+"");
+                        holder.mcb.setChecked(isSelected.get(position));
+                        initData(Double.parseDouble(good.getGoodsPrice()+""),position);
+                        holder.mcb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                            @Override
+                            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                if(isChecked)
+                                {
+                                    saveGood(position,Double.parseDouble(good.getGoodsPrice()+""));
+                                }else{
+                                    removeGood(position,Double.parseDouble(good.getGoodsPrice()+""));
+                                }
+
+                            }
+                        });
+                    }
                 }
             });
+
         }
     }
 
 
 
-    private void saveGood(int position)
+    private void saveGood(int position,double price)
     {
         presenter.saveGoodIds(shopCars.get(position).getGoodId());
         presenter.saveShopCarIds(shopCars.get(position).getGoodId());
-        presenter.changeMoney(1,500);
+        presenter.changeMoney(shopCars.get(position).getCount(),price);
     }
 
-    private void removeGood(int position)
+    private void removeGood(int position,double price)
     {
         presenter.removeGoodIds(shopCars.get(position).getGoodId());
         presenter.removShopCarIds(shopCars.get(position).getObjectId());
-        presenter.changeMoney(1,-500);
+        presenter.changeMoney(shopCars.get(position).getCount(),-price);
     }
 
 
     // 初始化isSelected的数据i<5暂时固定数据测试
-    private void initData() {
-        for (int i = 0; i < 5; i++) {
-            getIsSelected().put(i, false);
-        }
+    private void initData(double price,int position) {
+            getIsSelected().put(position, true);
+            saveGood(position,price);
+
     }
 
     public static HashMap<Integer, Boolean> getIsSelected() {

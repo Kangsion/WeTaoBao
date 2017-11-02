@@ -5,6 +5,7 @@
     <color name="colorAccent">#FF4081</color>
    <!--背景颜色-->
     <color name="colorBackground">#eeeeee</color>
+    <color name="white">#ffffff</color>
     <!--顶部颜色-->
     <color name="colorTop">#ff5000</color>
     <!--底部颜色 -->

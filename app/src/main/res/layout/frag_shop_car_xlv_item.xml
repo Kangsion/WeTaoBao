@@ -16,9 +16,54 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_margin="5dp"
-        android:src="@drawable/bookbag"
-        />
+        android:src="@drawable/bookbag" />
+
     <LinearLayout
+        android:id="@+id/frag_shop_car_xlv_item_xiu"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:visibility="gone" >
+
+        <Button
+            android:id="@+id/frag_shop_car_xlv_item_jian"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/view_bg"
+            android:text="-"/>
+        <EditText
+            android:id="@+id/frag_shop_car_xlv_item_num"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:text="1"
+            android:gravity="center"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/view_bg"
+            android:layout_height="match_parent" />
+        <Button
+            android:id="@+id/frag_shop_car_xlv_item_add"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:background="@drawable/view_bg"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="+"/>
+        <Button
+            android:id="@+id/frag_shop_car_xlv_item_ok"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/colorTopIcon"
+            android:background="@color/colorTop"
+            android:text="完成"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/frag_shop_car_xlv_item_li_content"
         android:layout_width="0dp"
         android:layout_weight="2"
         android:layout_marginLeft="5dp"
@@ -29,7 +74,9 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:text="ssssssssssssssssssssssssssss"
-            android:textSize="18sp"
+            android:lines="2"
+            android:ellipsize="end"
+            android:textSize="14sp"
             android:layout_marginTop="10dp"
             android:textColor="@color/colorFont"/>
         <TextView
@@ -41,6 +88,7 @@
             android:textSize="18sp"/>
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/frag_shop_car_xlv_item_li_content2"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
@@ -52,7 +100,7 @@
             android:layout_marginTop="50dp"
             android:textSize="18sp"
             android:textColor="@color/colorFont"
-            android:text="X"/>
+            android:text="x"/>
         <TextView
             android:id="@+id/frag_shop_car_xlv_item_good_count"
             android:layout_width="wrap_content"

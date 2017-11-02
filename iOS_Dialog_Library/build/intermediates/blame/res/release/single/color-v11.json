@@ -4,6 +4,10 @@
         "source": "E:\\AndroidSpace\\WeTaobao\\iOS_Dialog_Library\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\color-v11\\abc_background_cache_hint_selector_material_light.xml"
     },
     {
+        "merged": "F:\\warehouse\\WeTaoBao\\iOS_Dialog_Library\\build\\intermediates\\res\\merged\\release\\color-v11\\abc_background_cache_hint_selector_material_dark.xml",
+        "source": "F:\\warehouse\\WeTaoBao\\iOS_Dialog_Library\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\color-v11\\abc_background_cache_hint_selector_material_dark.xml"
+    },
+    {
         "merged": "E:\\AndroidSpace\\WeTaobao\\iOS_Dialog_Library\\build\\intermediates\\res\\merged\\release\\color-v11\\abc_background_cache_hint_selector_material_dark.xml",
         "source": "E:\\AndroidSpace\\WeTaobao\\iOS_Dialog_Library\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\color-v11\\abc_background_cache_hint_selector_material_dark.xml"
     },
@@ -22,5 +26,9 @@
     {
         "merged": "C:\\Users\\Ksion\\AndroidStudioProjects\\WeTaobao\\iOS_Dialog_Library\\build\\intermediates\\res\\merged\\release\\color-v11\\abc_background_cache_hint_selector_material_dark.xml",
         "source": "C:\\Users\\Ksion\\AndroidStudioProjects\\WeTaobao\\iOS_Dialog_Library\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\color-v11\\abc_background_cache_hint_selector_material_dark.xml"
+    },
+    {
+        "merged": "F:\\warehouse\\WeTaoBao\\iOS_Dialog_Library\\build\\intermediates\\res\\merged\\release\\color-v11\\abc_background_cache_hint_selector_material_light.xml",
+        "source": "F:\\warehouse\\WeTaoBao\\iOS_Dialog_Library\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\color-v11\\abc_background_cache_hint_selector_material_light.xml"
     }
 ]

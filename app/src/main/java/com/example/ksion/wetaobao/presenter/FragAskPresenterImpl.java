@@ -14,7 +14,7 @@ import java.util.List;
  * Created by Ksion on 2017/9/6.
  */
 
-public class FragAskPresenterImpl implements FragAskContract.IFragPresenter {
+public class FragAskPresenterImpl implements FragAskContract.IFragAskPresenter {
     private  FragAskContract.IFragAskView view;
 
     private List<Fragment> fragments;

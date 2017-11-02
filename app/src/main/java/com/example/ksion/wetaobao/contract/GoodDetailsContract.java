@@ -2,6 +2,7 @@ package com.example.ksion.wetaobao.contract;
 
 import android.content.Context;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.ksion.wetaobao.base.BasePresenter;
@@ -49,7 +50,7 @@ public class GoodDetailsContract {
 
         TextView getmActGoodsDetailsTvGoodsName();
 
-        XListView getmActGoodsDetailsXlv();
+        ListView getmActGoodsDetailsXlv();
 
         TextView getmActGoodsDetailsTvMoney();
 

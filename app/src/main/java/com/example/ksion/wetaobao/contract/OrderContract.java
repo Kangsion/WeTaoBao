@@ -1,5 +1,6 @@
 package com.example.ksion.wetaobao.contract;
 
+import android.content.Context;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -49,6 +50,8 @@ public class OrderContract {
             TextView getmActOrdersTvNumMoney();
 
             TextView getmActOrderTvGoodsMoney();
+
+            Context getContext();
     }
     public interface OrderPresenter extends BasePresenter<OrderView> {
 

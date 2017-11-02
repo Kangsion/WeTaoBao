@@ -55,6 +55,7 @@ public class ActGoodsResultAdapter extends BaseAdapter {
             vh.textView = (TextView) convertView.findViewById(R.id.act_goods_result_gv_item_tv_name);
             vh.mTvMoney = (TextView) convertView.findViewById(R.id.act_goods_result_gv_item_tv_money);
             vh.mFukuanNum= (TextView) convertView.findViewById(R.id.act_good_result_tv_fukuanNum);
+            vh.mAddress= (TextView) convertView.findViewById(R.id.act_good_result_gv_item_address);
             convertView.setTag(vh);
         }else {
             vh = (ViewHolder) convertView.getTag();
@@ -65,6 +66,7 @@ public class ActGoodsResultAdapter extends BaseAdapter {
         vh.textView.setText(goods.getGoodsName());
         vh.mFukuanNum.setText(goods.getXiaoliang()+"");
         vh.mTvMoney.setText("¥ "+goods.getGoodsPrice());
+        vh.mAddress.setText(goods.getGoodsAddress());
         //默认显示第一张图片
         Picasso.with(CustomApplcation.getInstance().context)
                 .load(goods.getGoodsImgs().getUrl())
@@ -72,7 +74,7 @@ public class ActGoodsResultAdapter extends BaseAdapter {
         return convertView;
     }
     class ViewHolder{
-        TextView textView,mTvMoney,mFukuanNum;
+        TextView textView,mTvMoney,mFukuanNum,mAddress;
         ImageView imageView;
     }
 }
