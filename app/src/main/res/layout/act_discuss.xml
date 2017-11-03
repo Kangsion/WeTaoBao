@@ -1,49 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/colorBackground"
     android:layout_height="match_parent">
     <LinearLayout
-        android:id="@+id/act_setting_ln_nav"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center"
         android:background="@color/colorBackground"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
         <ImageView
-            android:id="@+id/act_address_iv_back"
+            android:id="@+id/act_discuss_iv_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:clickable="true"
-            android:src="@drawable/frag_personal_left"
-            />
+            android:src="@drawable/frag_personal_left" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textColor="@color/colorFont"
-            android:gravity="center"
             android:textSize="16sp"
-            android:text="我的收货地址"
-            />
+            android:layout_marginLeft="20dp"
+            android:text="发表评论" />
         <TextView
-            android:id="@+id/act_address_tv_add"
+            android:id="@+id/act_discuss_tv_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="新增"
+            android:text="发表评论"
             android:layout_marginRight="5dp"
-            android:textColor="@color/colorFont"
-            />
+            android:textColor="@color/colorFont" />
     </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="20dp"
-        android:background="@color/colorLine" />
 
-    <com.baoyz.swipemenulistview.SwipeMenuListView
-        android:id="@+id/act_address_lv"
+    <EditText
+        android:id="@+id/act_discuss_content"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:hint="有什么想说的，就在这里说吧"
+        android:background="@color/white"
+        android:textColorHint="@color/colorFont" />
+
+    <TextView
+        android:background="@color/white"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

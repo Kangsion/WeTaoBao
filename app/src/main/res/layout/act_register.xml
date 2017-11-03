@@ -48,23 +48,30 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
             android:gravity="center"
-            android:text="国家地区"
+            android:text="手机号码"
             android:textColor="@color/colorFont"
             android:textSize="18sp" />
 
-
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="#D7D7D7">
 
             <EditText
+                android:id="@+id/act_home_et_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:editable="false"
-                android:hint="中国大陆+86"
-                android:text="中国大陆+86 "
+                android:layout_marginLeft="20dp"
+                android:hint="请输入手机号码"
+                android:singleLine="true"
                 android:textColor="@color/colorFont" />
+        </android.support.design.widget.TextInputLayout>
+
+
+
 
     </LinearLayout>
 
@@ -77,24 +84,27 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
             android:gravity="center"
-            android:text="手机号码"
+            android:text="验  证  码"
             android:textColor="@color/colorFont"
             android:textSize="18sp" />
-
-
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColorHint="#D7D7D7">
 
             <EditText
-                android:id="@+id/act_home_et_phone"
+                android:id="@+id/act_home_et_sms_code"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:hint="请输入手机号码"
+                android:layout_marginLeft="20dp"
+                android:hint="请输入验证码"
                 android:singleLine="true"
                 android:textColor="@color/colorFont" />
-
+        </android.support.design.widget.TextInputLayout>
 
         <View
             android:layout_width="1dp"
@@ -113,34 +123,6 @@
             android:text="获取验证码"
             android:textColor="#ffffff"
             android:textSize="18sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="验 证  码"
-            android:textColor="@color/colorFont"
-            android:textSize="18sp" />
-
-
-
-            <EditText
-                android:id="@+id/act_home_et_sms_code"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:hint="请输入验证码"
-                android:singleLine="true"
-                android:textColor="@color/colorFont" />
 
     </LinearLayout>
 
@@ -153,22 +135,26 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
             android:gravity="center"
             android:text="昵        称"
             android:textColor="@color/colorFont"
             android:textSize="18sp" />
 
-
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="#D7D7D7">
             <EditText
                 android:id="@+id/act_reg_et_nick_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
+                android:layout_marginLeft="20dp"
                 android:hint="请输入昵称"
                 android:singleLine="true"
                 android:textColor="@color/colorFont" />
+        </android.support.design.widget.TextInputLayout>
 
     </LinearLayout>
 
@@ -181,23 +167,26 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
             android:text="密        码"
             android:textColor="@color/colorFont"
             android:textSize="18sp" />
 
-
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="#D7D7D7">
             <EditText
                 android:id="@+id/act_reg_et_pwd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
+                android:layout_marginLeft="20dp"
                 android:hint="请输入密码"
                 android:inputType="textPassword"
                 android:singleLine="true"
                 android:textColor="@color/colorFont" />
-
+        </android.support.design.widget.TextInputLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -209,23 +198,28 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
             android:text="重复密码"
             android:textColor="@color/colorFont"
             android:textSize="18sp" />
 
-
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="#D7D7D7">
 
             <EditText
                 android:id="@+id/act_reg_et_pwd2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
+                android:layout_marginLeft="20dp"
                 android:hint="请重复输入密码"
                 android:inputType="textPassword"
                 android:singleLine="true"
                 android:textColor="@color/colorFont" />
+
+        </android.support.design.widget.TextInputLayout>
 
     </LinearLayout>
 
