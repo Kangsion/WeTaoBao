@@ -13,7 +13,7 @@ import cn.bmob.v3.datatype.BmobFile;
  * Created by Ksion on 2017/9/5.
  */
 
-public class User  extends BmobObject{
+public class User  extends BmobUser{
     //手机号
     private String phone;
     //密码
@@ -41,8 +41,8 @@ public class User  extends BmobObject{
         this.pwd = pwd;
     }
 
-    //收货地址的集合
-    private List<String> addressLists;
+    //收货地址
+    private String address;
     /**
      * 收藏的商品的Id
      */
@@ -65,6 +65,14 @@ public class User  extends BmobObject{
         return userHead;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public void setUserHead(BmobFile userHead) {
         this.userHead = userHead;
     }
@@ -77,16 +85,7 @@ public class User  extends BmobObject{
         this.sex = sex;
     }
 
-    public List<String> getAddressLists() {
-        if (addressLists == null) {
-            addressLists = new ArrayList<>();
-        }
-        return addressLists;
-    }
 
-    public void setAddressLists(List<String> addressLists) {
-        this.addressLists = addressLists;
-    }
 
     public List<String> getLoveGoodsIds() {
         if (loveGoodsIds ==null){

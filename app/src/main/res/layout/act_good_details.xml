@@ -29,26 +29,24 @@
 
                 <ImageView
                     android:id="@+id/act_good_details_iv_back"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_marginLeft="5dp"
                     android:clickable="true"
                     android:background="@drawable/radius_back"
-                    android:src="@drawable/frag_personal_left"
-                    />
+                    android:src="@drawable/frag_personal_left" />
                 <TextView
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" />
                 <ImageView
                     android:id="@+id/act_good_details_iv_shopcar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:background="@drawable/radius_back"
                     android:src="@drawable/selector_act_home_btn_shop_car"
                     android:layout_marginRight="5dp"
-                    android:textColor="@color/colorFont"
-                    />
+                    android:textColor="@color/colorFont" />
             </LinearLayout>
 
             </FrameLayout>
@@ -66,9 +64,10 @@
                 <TextView
                     android:id="@+id/act_goods_details_tv_goods_name"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
                     android:text="assadsad" />
 
                 <View
@@ -104,8 +103,7 @@
                 android:text="24:00前付款,预计后天送到"
                 android:textColor="@color/colorFont"
                 android:layout_marginLeft="20dp"
-                android:textSize="13sp"
-                />
+                android:textSize="13sp" />
 
             <View
                 android:layout_width="match_parent"
@@ -121,10 +119,11 @@
                 android:textColor="@color/colorFont"
                 android:textSize="18sp" />
 
-            <ListView
+
+            <com.example.ksion.wetaobao.widget.XListView
                 android:id="@+id/act_goods_details_xlv"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="150dp"
                 android:layout_marginTop="5dp" />
         </LinearLayout>
 
@@ -167,7 +166,7 @@
             android:layout_marginTop="5dp"
             android:layout_weight="1"
             android:background="@color/colorTransparency"
-            android:drawableTop="@drawable/act_goods_details_shoucang"
+            android:drawableTop="@drawable/act_goods_details_shouchuang_press_change"
             android:gravity="center"
             android:text="收藏"
             android:textColor="@drawable/selector_act_home_btn_text_color" />

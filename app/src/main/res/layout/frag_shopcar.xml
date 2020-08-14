@@ -18,15 +18,53 @@
             android:gravity="center"
             android:text="购物车"
             android:textColor="@color/colorFont"
-            android:textSize="16sp" />/>
+            android:textSize="18sp" />
 
-        <ImageView
-            android:id="@+id/frag_shop_car_msg"
+        <TextView
+            android:id="@+id/frag_shopcar_manager"
+            android:textSize="18sp"
+            android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:src="@drawable/frag_we_msg" />
+            android:layout_marginRight="10dp"
+            android:text="管理"/>
+        <TextView
+            android:id="@+id/frag_shopcar_ok"
+            android:textSize="18sp"
+            android:visibility="gone"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="完成"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/frag_shopcar_li_manager"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:visibility="gone"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/frag_shopcar_shoucang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:text="移入收藏夹"/>
+        <TextView
+            android:id="@+id/frag_shopcar_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:text="删除"/>
     </LinearLayout>
 
     <View
@@ -35,6 +73,91 @@
         android:background="@color/colorLine" />
     <!--顶部区域结束-->
     <!--带有侧滑删除的listview-->
+
+
+    <RelativeLayout
+        android:id="@+id/frag_shopcar_ln"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <!--  android:descendantFocusability="blocksDescendants"
+        表示覆盖子空间获取焦点，解决itemclick无效的问题-->
+
+
+
+        <ListView
+            android:id="@+id/frag_shopcar_listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp" />
+
+
+        <LinearLayout
+            android:id="@+id/frag_shop_car_bottom"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/frag_shop_car_cb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="全选"
+                android:textColor="@color/colorFont"
+                android:layout_marginTop="10dp"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/colorFont"
+                android:text="合计:"
+                android:id="@+id/textView2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="18sp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colorSelectedIcon"
+                android:text="¥ "/>
+            <TextView
+                android:id="@+id/frag_shop_car_tv_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                android:textColor="@color/colorSelectedIcon"
+                android:text="1111110.00"/>
+            <Button
+                android:id="@+id/frag_shop_car_btn_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:text="结算"
+                android:background="@color/colorSelectedIcon"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorLine" />
    <LinearLayout
        android:id="@+id/frag_shopcar_notGood"
        android:layout_width="wrap_content"
@@ -48,81 +171,7 @@
            android:layout_height="wrap_content"
            android:text="购物车为空"
            android:textColor="@color/colorFont"
-           android:textSize="48sp"
-           />
+           android:textSize="48sp" />
    </LinearLayout>
 
-
-    <RelativeLayout
-        android:id="@+id/frag_shopcar_ln"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <!--  android:descendantFocusability="blocksDescendants"
-        表示覆盖子空间获取焦点，解决itemclick无效的问题-->
-        <com.baoyz.swipemenulistview.SwipeMenuListView
-            android:id="@+id/frag_shopcar_lv"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-
-        <LinearLayout
-            android:layout_alignParentBottom="true"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-            <CheckBox
-                android:id="@+id/frag_shop_car_cb"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:text="全选"
-                android:textColor="@color/colorFont"
-                android:layout_marginTop="10dp"
-                android:textSize="18sp"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="2"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/colorFont"
-                android:text="合计:"
-                android:id="@+id/textView2" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:textSize="18sp"
-                android:layout_marginLeft="10dp"
-                android:textColor="@color/colorSelectedIcon"
-                android:text="¥ "/>
-            <TextView
-                android:id="@+id/frag_shop_car_tv_money"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:textSize="18sp"
-                android:gravity="center_vertical"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/colorSelectedIcon"
-                android:text="0.00"/>
-            <Button
-                android:id="@+id/frag_shop_car_btn_submit"
-                android:layout_width="0dp"
-                android:layout_weight="2"
-                android:layout_height="wrap_content"
-                android:textColor="#ffffff"
-                android:textSize="18sp"
-                android:text="结算"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/colorSelectedIcon"/>
-        </LinearLayout>
-    </RelativeLayout>
 </LinearLayout>

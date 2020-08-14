@@ -3,12 +3,14 @@ package com.example.ksion.wetaobao.contract;
 import android.content.Context;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.example.ksion.wetaobao.base.BasePresenter;
 import com.example.ksion.wetaobao.base.BaseView;
+import com.example.ksion.wetaobao.widget.XListView;
 
 /**
  * Created by Ksion on 2017/9/8.
@@ -16,7 +18,6 @@ import com.example.ksion.wetaobao.base.BaseView;
 
 public class FragShopcarContract {
     public interface FragShopcarView extends BaseView<FragShopcarPresenter>{
-        SwipeMenuListView getmFragShopcarLv();
 
         CheckBox getmFragShopCarCb();
 
@@ -26,6 +27,7 @@ public class FragShopcarContract {
 
         RelativeLayout getmFragShopcarLn();
 
+        ListView getmShopCarListView();
 
         Context getShopCarContext();
 
@@ -54,6 +56,8 @@ public class FragShopcarContract {
          * @param sum  订单金额
          */
         void jumpActivity(String objectId, double sum);
+
+        TextView getmTvShopCarManager();
     }
     public interface FragShopcarPresenter extends BasePresenter<FragShopcarView>{
         void queryDatasFromServer();
@@ -94,5 +98,9 @@ public class FragShopcarContract {
          */
         void removShopCarIds(String objectId);
 
+
+        void DeleteSelected();
+
+        void ShouCangSelected();
     }
 }

@@ -1,1 +1,1 @@
-include ':app', ':iOS_Dialog_Library'
+include ':app'

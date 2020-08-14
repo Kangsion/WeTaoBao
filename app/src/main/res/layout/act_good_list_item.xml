@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:background="@color/colorTopIcon"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/act_good_list_item_image"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/bookbag" />
+
+    <View
+        android:layout_marginTop="2dp"
+        android:background="#f5f5f5"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+
+    <TextView
+        android:id="@+id/act_good_list_item_goodName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/colorFont"
+        android:text="电竞机械牧马人游戏鼠" />
+
+    <TextView
+        android:id="@+id/act_good_list_item_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="110dp"
+        android:text="广州" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorTopIcon"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorTop"
+            android:text="￥" />
+
+        <TextView
+            android:id="@+id/act_good_list_item_cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorTop"
+            android:textSize="24sp"
+            android:text="19.8" />
+
+
+        <TextView
+            android:id="@+id/act_good_list_item_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="524" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="人付款" />
+
+    </LinearLayout>
+
+</LinearLayout>

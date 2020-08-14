@@ -28,9 +28,11 @@ public abstract class BaseFragment extends Fragment{
     private AlertDialog.Builder builder;
     private AlertDialog alertDialog;
     private ProgressDialog dialog;
+    public boolean isPrepared = false;
 
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater,@Nullable  ViewGroup container, Bundle savedInstanceState) {
         if(contentView==null)
         {
             contentView=initLayout(inflater,container,false);
@@ -43,7 +45,7 @@ public abstract class BaseFragment extends Fragment{
 
     }
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         //初始化数据
         initData(savedInstanceState);
@@ -72,10 +74,9 @@ public abstract class BaseFragment extends Fragment{
     @Override
     public final void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-
         if (getUserVisibleHint()) {
             isVisible = true;
-
+            onVisible();
         } else {
             isVisible = false;
             onInvisible();
@@ -83,7 +84,12 @@ public abstract class BaseFragment extends Fragment{
     }
 
 
-
+    /**
+     * 可见
+     */
+    protected void onVisible() {
+        lazyLoad();
+    }
 
     /**
      * 不可见
@@ -92,7 +98,7 @@ public abstract class BaseFragment extends Fragment{
 
     }
 
-
+    protected abstract void lazyLoad();
 
 
     @Override

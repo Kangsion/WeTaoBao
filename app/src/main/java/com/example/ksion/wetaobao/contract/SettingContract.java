@@ -12,9 +12,6 @@ public class SettingContract  {
 
      }
      public interface SettingPersenter extends BasePresenter<SettingView> {
-         /**
-          * 退出登录
-          */
-         void logingOut();
+
      }
 }

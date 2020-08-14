@@ -82,6 +82,7 @@ public class GoodsDetailsActivity extends BaseActivity implements GoodDetailsCon
         mActGoodsDetailsBtnGoumai.setOnClickListener(this);
         mActGoodsDetailsBtnJiaru.setOnClickListener(this);
         mActGoodsDetailsIvShopCar.setOnClickListener(this);
+        mActGoodsDetailsBtnShoucang.setOnClickListener(this);
     }
 
     @Override
@@ -101,7 +102,7 @@ public class GoodsDetailsActivity extends BaseActivity implements GoodDetailsCon
 
     @Override
     public void jumpActivity() {
-
+        startActivity(new Intent(this,LoginActivity.class));
     }
 
     @Override
@@ -162,7 +163,8 @@ public class GoodsDetailsActivity extends BaseActivity implements GoodDetailsCon
                 break;
             case R.id.act_goods_details_btn_dianpu:
                 break;
-            case R.id.act_goods_details_btn_shoucang://收藏按钮被点击时,暂时不使用
+            case R.id.act_goods_details_btn_shoucang://收藏按钮
+                presenter.GoodCollection();
                 break;
             case R.id.act_goods_details_btn_jiaru://加入购物车
                 if(isLogin()) {
@@ -182,4 +184,9 @@ public class GoodsDetailsActivity extends BaseActivity implements GoodDetailsCon
         }
         }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.initData();
+    }
 }

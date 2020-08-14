@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/WeTaoBao.iml" filepath="$PROJECT_DIR$/WeTaoBao.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/iOS_Dialog_Library/iOS_Dialog_Library.iml" filepath="$PROJECT_DIR$/iOS_Dialog_Library/iOS_Dialog_Library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WeTaoBao.iml" filepath="$PROJECT_DIR$/WeTaoBao.iml" group="WeTaoBao" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="WeTaoBao/app" />
     </modules>
   </component>
 </project>

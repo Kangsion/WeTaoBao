@@ -78,5 +78,7 @@ public class GoodDetailsContract {
          * @param type 1:分享到好友列表 2 分享到朋友圈
          */
         void shareWXAPP(int type);
+
+        void GoodCollection();
     }
 }

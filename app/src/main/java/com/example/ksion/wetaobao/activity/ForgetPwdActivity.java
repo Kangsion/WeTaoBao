@@ -127,7 +127,7 @@ public class ForgetPwdActivity extends BaseActivity implements FragForPwdContrac
             case R.id.act_forget_tv_reset:
                 presenter.reset();
                 break;
-            case R.id.act_good_details_iv_back:
+            case R.id.frag_forget_tv_back:
                 finish();
                 break;
         }

@@ -43,21 +43,20 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="20dp"
-        android:background="@color/colorLine"></View>
+        android:background="@color/colorLine" />
 
     <LinearLayout
         android:id="@+id/act_person_details_ln_head"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
             android:text="淘宝头像"
             android:textSize="18dp" />
 
@@ -65,9 +64,14 @@
             android:id="@+id/act_person_details_iv_head"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="200dp"
             android:layout_marginRight="10dp"
             android:src="@drawable/default_head" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_more"/>
     </LinearLayout>
 
     <View
@@ -78,15 +82,15 @@
     <LinearLayout
         android:id="@+id/act_person_details_ln_huiyuan_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
             android:text="会员名"
             android:textSize="18dp" />
 
@@ -94,11 +98,10 @@
             android:id="@+id/act_person_details_tv_huiyan_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="200dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
+            android:layout_marginRight="10dp"
             android:text="筱广King"
             android:textSize="18dp" />
+
     </LinearLayout>
 
     <View
@@ -109,16 +112,15 @@
     <LinearLayout
         android:id="@+id/act_person_details_ln_nick_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="1">
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
             android:text="淘宝昵称"
             android:textSize="18dp" />
 
@@ -126,12 +128,15 @@
             android:id="@+id/act_person_details_tv_nick_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="190dp"
-            android:layout_marginTop="10dp"
-            android:layout_weight="0.07"
-            android:gravity="center"
+            android:layout_marginRight="10dp"
             android:text="筱广King"
             android:textSize="18dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_more"/>
     </LinearLayout>
 
     <View
@@ -142,16 +147,15 @@
     <LinearLayout
         android:id="@+id/act_person_details_ln_sex"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <TextView
-
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
             android:text="性别"
             android:textSize="18dp" />
 
@@ -159,11 +163,15 @@
             android:id="@+id/act_person_details_tv_sex"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="260dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
+            android:layout_marginRight="10dp"
             android:text="男"
-            android:textSize="18dp" />
+            android:textSize="18sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_more"/>
     </LinearLayout>
 
     <View
@@ -174,26 +182,30 @@
     <LinearLayout
         android:id="@+id/act_person_details_ln_ercode"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
             android:text="我的二维码名片"
-            android:textSize="18dp" />
+            android:textSize="18sp" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="200dp"
             android:layout_marginRight="10dp"
             android:src="@drawable/act_person_detials_code" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_more"/>
     </LinearLayout>
 
     <View
@@ -205,16 +217,30 @@
         android:id="@+id/act_person_details_ln_address"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
             android:text="我的收货地址"
-            android:textSize="18dp" />
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/act_person_details_tv_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="广州"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_more"/>
     </LinearLayout>
 
     <View

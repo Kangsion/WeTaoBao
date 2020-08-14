@@ -1,6 +1,9 @@
 package com.example.ksion.wetaobao.contract;
 
+import android.content.Context;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.ksion.wetaobao.base.BasePresenter;
 import com.example.ksion.wetaobao.base.BaseView;
@@ -14,6 +17,10 @@ public class PersonalContract {
         GridView getmFragPersonalGvBottom();
 
         GridView getmFragPersonalGvCenter();
+
+
+        ImageView getmIvUserImg();
+        TextView getmTvUserName();
 
         /**
          * Toast数据
@@ -33,6 +40,8 @@ public class PersonalContract {
          * 取消进度条
          */
         void canelLoadingDialog();
+
+        Context getPersonalContext();
 
         /**
          * activity的跳转  1 为跳转到订单页面  2 为跳转到收藏界面

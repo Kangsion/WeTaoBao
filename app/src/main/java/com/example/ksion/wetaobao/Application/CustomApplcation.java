@@ -87,6 +87,6 @@ public class CustomApplcation extends Application {
         //初始化Bmob 支付SDK
         BP.init(context,Contracts.BMOB_APP_KEY);
         //Bmob自动更新
-        BmobUpdateAgent.initAppVersion(context);
+        BmobUpdateAgent.initAppVersion();
     }
 }

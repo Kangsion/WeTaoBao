@@ -1,5 +1,6 @@
 package com.example.ksion.wetaobao.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ public class SplashActivity extends BaseActivity {
 
     }
 
+    @SuppressLint("HandlerLeak")
     Handler handler=new Handler()
     {
         @Override
@@ -34,6 +36,7 @@ public class SplashActivity extends BaseActivity {
                 case 3000:
                     Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
                     startActivity(intent);
+                    finish();
             }
 
         }

@@ -1,18 +1,22 @@
 package com.example.ksion.wetaobao.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.ksion.wetaobao.Application.CustomApplcation;
 import com.example.ksion.wetaobao.R;
 import com.example.ksion.wetaobao.adapter.ActGoodsResultAdapter;
 import com.example.ksion.wetaobao.base.BaseActivity;
 import com.example.ksion.wetaobao.bean.Goods;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobPushManager;
@@ -30,6 +34,9 @@ public class SearchGoodActivity extends BaseActivity  implements View.OnClickLis
      private ImageView mSearchBack;
      private TextView mSearch;
      private GridView mSearchGridView;
+     private TextView mTvSearchRsult;
+
+     List<Goods> searchlist;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,6 +50,7 @@ public class SearchGoodActivity extends BaseActivity  implements View.OnClickLis
         mSearchBack= (ImageView) findViewById(R.id.act_search_iv_back);
         mSearch= (TextView) findViewById(R.id.act_search_tv_search);
         mSearchGridView= (GridView) findViewById(R.id.act_search_result_gv);
+        mTvSearchRsult= (TextView) findViewById(R.id.act_search_tv_result);
         mSearchBack.setOnClickListener(this);
         mSearch.setOnClickListener(this);
     }
@@ -60,19 +68,39 @@ public class SearchGoodActivity extends BaseActivity  implements View.OnClickLis
     }
 
     private void searchGood() {
-        String goodName=mSearchContent.getText().toString().trim();
+        final String goodName=mSearchContent.getText().toString().trim();
         if(!goodName.isEmpty()) {
-            String sql="select * from Goods where goodsName like '%"+goodName+"%'";
-            new BmobQuery<Goods>().doSQLQuery(this, sql, new SQLQueryListener<Goods>() {
-                @Override
-                public void done(BmobQueryResult<Goods> bmobQueryResult, BmobException e) {
-                      if(bmobQueryResult!=null) {
-                          List<Goods> goodsList=bmobQueryResult.getResults();
-                          mSearchGridView.setAdapter(new ActGoodsResultAdapter(goodsList,
-                                  SearchGoodActivity.this));
-                      }
-                }
-            });
+            String sql="select * from Goods";
+//            new BmobQuery<Goods>().doSQLQuery(this, sql, new SQLQueryListener<Goods>() {
+//                @Override
+//                public void done(BmobQueryResult<Goods> bmobQueryResult, BmobException e) {
+//                      if(bmobQueryResult!=null) {
+//                          List<Goods> goodsList=bmobQueryResult.getResults();
+//                          for (int i = 0; i < goodsList.size(); i++) {
+//                              if(goodsList.get(i).getGoodsName().contains(goodName)) {
+//                                  searchlist=new ArrayList<Goods>();
+//                                  searchlist.add(goodsList.get(i));
+//
+//                          }
+//                          }
+//                          if(searchlist!=null) {
+//                              mSearchGridView.setAdapter(new ActGoodsResultAdapter(searchlist,
+//                                      SearchGoodActivity.this));
+//
+//                              mSearchGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                                  @Override
+//                                  public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+//                                       CustomApplcation.putDatas("goods",searchlist.get(position));
+//                                        startActivity(new Intent(SearchGoodActivity.this,GoodsDetailsActivity.class));
+//                                  }
+//                              });
+//                          } else {
+//                              mTvSearchRsult.setVisibility(View.VISIBLE);
+//                              mSearchGridView.setVisibility(View.INVISIBLE);
+//                          }
+//                      }
+//                }
+//            });
         }
     }
 }

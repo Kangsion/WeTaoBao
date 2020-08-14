@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/act_setting_ln_nav"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="18dp"></ScrollView>
+        android:layout_marginStart="18dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"

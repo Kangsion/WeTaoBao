@@ -1,5 +1,6 @@
 package com.example.ksion.wetaobao.contract;
 
+import android.content.Context;
 import android.net.Uri;
 import android.widget.TextView;
 
@@ -35,10 +36,15 @@ public class PersonalDetailContract {
          */
         void showLoadingDialog(String title, String msg, boolean flag);
 
+        Context getContext();
+
+
         /**
          * 取消进度条
          */
         void canelLoadingDialog();
+
+        TextView getmActPersonDetailsTvAdress();
 
         /**
          * activity的跳转
@@ -52,11 +58,9 @@ public class PersonalDetailContract {
          */
         void upload(Uri uri);
 
-        /**
-         * 更改用户的个人信息
-         * @param text  更改后的数据
-         * @param type 类型 1 :更改昵称 2:更改性别 3;
-         */
-        void updateUserInfo(String text, int type);
+
+        void updateUserSex(String text);
+
+
     }
 }

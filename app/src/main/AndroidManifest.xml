@@ -48,6 +48,15 @@
         <activity android:name=".activity.AddressChangeActivity" />
         <activity android:name=".activity.MyOrderActivity" />
         <activity android:name=".activity.SearchGoodActivity"/>
+        <activity android:name=".activity.CollectionActivity" />
+        <activity android:name=".activity.DiscussActivity" />
+        <activity android:name=".activity.UserNameChangeActivity" />
+
+
+        <provider
+            android:name="cn.bmob.v3.util.BmobContentProvider"
+            android:authorities="com.example.ksion.wetaobao.BmobContentProvider">
+        </provider>
     </application>
 
 </manifest>

@@ -58,18 +58,19 @@
             android:textColor="@color/colorFont" />
 
         <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:textColorHint="#D7D7D7">
         <EditText
             android:id="@+id/frag_forget_tv_tel"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="#cccc"
             android:layout_marginLeft="20dp"
             android:hint="请输入手机号码" />
         </android.support.design.widget.TextInputLayout>
+
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"

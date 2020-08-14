@@ -18,9 +18,10 @@
           <com.jude.rollviewpager.RollPagerView
               android:id="@+id/frag_home_roll_vp_ad"
               android:layout_width="match_parent"
-              android:layout_height="125dp" />
+              android:layout_height="125dp"
+              app:rollviewpager_play_delay="3000" />
 
-          <com.example.ksion.wetaobao.widget.SourcePanel
+          <GridView
               android:id="@+id/frag_home_gv_sort"
               android:layout_width="match_parent"
               android:layout_height="180dp"
@@ -44,6 +45,11 @@
                 android:id="@+id/frag_home_gv_marquee"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
+                app:mvAnimDuration="1000"
+                app:mvGravity="center"
+                app:mvInterval="3000"
+                app:mvTextColor="@color/colorFont"
+                app:mvTextSize="14sp"
                 />
            </LinearLayout>
           <View

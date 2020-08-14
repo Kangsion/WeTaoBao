@@ -3,7 +3,6 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
-        android:id="@+id/act_setting_ln_nav"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center"
@@ -16,8 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:clickable="true"
-            android:src="@drawable/frag_personal_left"
-            />
+            android:src="@drawable/frag_personal_left" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -25,16 +23,8 @@
             android:textColor="@color/colorFont"
             android:gravity="center"
             android:textSize="16sp"
-            android:text="我的收货地址"
-            />
-        <TextView
-            android:id="@+id/act_address_tv_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="新增"
-            android:layout_marginRight="5dp"
-            android:textColor="@color/colorFont"
-            />
+            android:text="我的收货地址" />
+
     </LinearLayout>
     <View
         android:layout_width="match_parent"
@@ -42,8 +32,24 @@
         android:layout_marginTop="20dp"
         android:background="@color/colorLine" />
 
-    <com.baoyz.swipemenulistview.SwipeMenuListView
-        android:id="@+id/act_address_lv"
+    <EditText
+        android:id="@+id/act_address_edit"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="50dp"
+        android:background="#ffffff"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/act_address_save"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="18sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:background="@drawable/seletor_frag_login_btn_login"
+        android:text="保存"/>
 </LinearLayout>

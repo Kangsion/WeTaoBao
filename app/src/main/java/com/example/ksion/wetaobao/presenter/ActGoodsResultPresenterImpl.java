@@ -43,16 +43,16 @@ public class ActGoodsResultPresenterImpl implements GoodResultContract.GoodResul
     public void initData() {
         gridView=view.getmActGoodsResultGv();
         String sql="select * from Goods where goodsTypeId='"+typeId+"'";
-        new BmobQuery<Goods>().doSQLQuery(view.getContext(),sql, new SQLQueryListener<Goods>() {
-            @Override
-            public void done(BmobQueryResult<Goods> bmobQueryResult, BmobException e) {
-                if(!bmobQueryResult.getResults().isEmpty()) {
-                    goodsList = bmobQueryResult.getResults();
-                    gridView.setAdapter(new ActGoodsResultAdapter(goodsList, CustomApplcation.getInstance().context));
-                    initEvent();
-                }
-            }
-        });
+//        new BmobQuery<Goods>().doSQLQuery(view.getContext(),sql, new SQLQueryListener<Goods>() {
+//            @Override
+//            public void done(BmobQueryResult<Goods> bmobQueryResult, BmobException e) {
+//                if(!bmobQueryResult.getResults().isEmpty()) {
+//                    goodsList = bmobQueryResult.getResults();
+//                    gridView.setAdapter(new ActGoodsResultAdapter(goodsList, CustomApplcation.getInstance().context));
+//                    initEvent();
+//                }
+//            }
+//        });
 
     }
 

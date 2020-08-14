@@ -151,8 +151,7 @@ public class OrderActivity extends BaseActivity  implements OrderContract.OrderV
         //设置收货人
         mActOrderTvShouhuoName.setText(CustomApplcation.getInstance().getCurrentUser().getUserName());
         //设置默认收货地址
-        mActOrderTvShouhuoAddress.setText("收货地址："+CustomApplcation.getInstance().getCurrentUser().
-                getAddressLists());
+        mActOrderTvShouhuoAddress.setText("收货地址："+CustomApplcation.getInstance().getCurrentUser().getAddress());
         //设置电话号码(默认为注册时的电话号码)
         mActOrderTvShouhuoPhone.setText(CustomApplcation.getInstance().getCurrentUser().getPhone()+"");
         //设置商品图片(默认为第一张图片)

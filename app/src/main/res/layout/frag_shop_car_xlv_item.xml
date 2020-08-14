@@ -23,13 +23,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:orientation="horizontal"
-        android:visibility="gone" >
+        android:orientation="horizontal">
 
-        <Button
+        <TextView
             android:id="@+id/frag_shop_car_xlv_item_jian"
             android:layout_weight="1"
             android:layout_width="0dp"
+            android:textSize="24sp"
+            android:gravity="center"
             android:layout_height="wrap_content"
             android:background="@drawable/view_bg"
             android:text="-"/>
@@ -42,10 +43,12 @@
             android:layout_marginLeft="5dp"
             android:background="@drawable/view_bg"
             android:layout_height="match_parent" />
-        <Button
+        <TextView
             android:id="@+id/frag_shop_car_xlv_item_add"
             android:layout_weight="1"
             android:layout_width="0dp"
+            android:textSize="24sp"
+            android:gravity="center"
             android:background="@drawable/view_bg"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -66,6 +69,7 @@
         android:id="@+id/frag_shop_car_xlv_item_li_content"
         android:layout_width="0dp"
         android:layout_weight="2"
+        android:visibility="gone"
         android:layout_marginLeft="5dp"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -73,7 +77,7 @@
             android:id="@+id/frag_shop_car_xlv_item_good_name"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:text="ssssssssssssssssssssssssssss"
+            android:text="sssssssssss"
             android:lines="2"
             android:ellipsize="end"
             android:textSize="14sp"
@@ -87,10 +91,22 @@
             android:textColor="@color/colorSelectedIcon"
             android:textSize="18sp"/>
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/frag_shop_car_xlv_item_li_xiushu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/frag_shop_car_xlv_item_xiugai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="改变"/>
+
     <LinearLayout
         android:id="@+id/frag_shop_car_xlv_item_li_content2"
-        android:layout_width="0dp"
-        android:layout_weight="1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="5dp"
         android:orientation="horizontal">
@@ -98,7 +114,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:textColor="@color/colorFont"
             android:text="x"/>
         <TextView
@@ -111,5 +127,5 @@
             android:textSize="18sp"
             android:text="1"/>
     </LinearLayout>
-
+    </LinearLayout>
 </LinearLayout>

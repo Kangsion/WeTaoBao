@@ -46,21 +46,21 @@ public class ActGoodsTypePresenterImpl  implements GoodTypeContract.GoodTypePres
         gridView=view.getmActGoodsTypeGv();
         lnContent=view.getmActGoodsTypeLnContent();
         BmobQuery<GoodsType> query=new BmobQuery<>();
-        query.findObjects(view.getContext(), new FindListener<GoodsType>() {
-            @Override
-            public void onSuccess(List<GoodsType> list) {
-                if(!list.isEmpty()) {
-                    view.showLoadingDialog("","数据加载中",true);
-                    goodsTypes=list;
-                    gridView.setAdapter(new ActGoodsTypeAdapter(list, CustomApplcation.getInstance().context));
-                    view.canelLoadingDialog();
-                }
-            }
-            @Override
-            public void onError(int i, String s) {
-                 view.showMsg("数据加载失败。。");
-            }
-        });
+//        query.findObjects(view.getContext(), new FindListener<GoodsType>() {
+//            @Override
+//            public void onSuccess(List<GoodsType> list) {
+//                if(!list.isEmpty()) {
+//                    view.showLoadingDialog("","数据加载中",true);
+//                    goodsTypes=list;
+//                    gridView.setAdapter(new ActGoodsTypeAdapter(list, CustomApplcation.getInstance().context));
+//                    view.canelLoadingDialog();
+//                }
+//            }
+//            @Override
+//            public void onError(int i, String s) {
+//                 view.showMsg("数据加载失败。。");
+//            }
+//        });
         initEvent();
     }
 

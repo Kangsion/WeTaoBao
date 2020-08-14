@@ -16,10 +16,6 @@ public class ActSettingPersenterImpl implements SettingContract.SettingPersenter
         view.setPresenter(this);
     }
 
-    @Override
-    public void logingOut() {
-
-    }
 
     @Override
     public void initData() {

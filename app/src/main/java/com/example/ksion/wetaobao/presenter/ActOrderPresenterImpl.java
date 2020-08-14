@@ -76,18 +76,18 @@ public class ActOrderPresenterImpl implements OrderContract.OrderPresenter {
         orders.setOrdersState(0);//设置订单状态为代付款0
         orders.setOerdersMoney(sum);
         orders.setGoodsCount(count);
-        orders.save(view.getContext(), new SaveListener() {
-            @Override
-            public void onSuccess() {
-                view.showMsg("生产订单成功");
-                view.jumpActivity(null,0);
-            }
-
-            @Override
-            public void onFailure(int i, String s) {
-                view.showMsg("生成订单失败");
-            }
-        });
+//        orders.save(view.getContext(), new SaveListener() {
+//            @Override
+//            public void onSuccess() {
+//                view.showMsg("生产订单成功");
+//                view.jumpActivity(null,0);
+//            }
+//
+//            @Override
+//            public void onFailure(int i, String s) {
+//                view.showMsg("生成订单失败");
+//            }
+//        });
          /*   if(a>0) {
                     view.showMsg("下单成功,将要跳转到支付界面");
                     //将直接跳转到支付页面,将订单号和金额传递到支付activity

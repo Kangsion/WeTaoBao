@@ -6,7 +6,9 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.example.ksion.wetaobao.R;
 import com.example.ksion.wetaobao.base.BaseFragment;
@@ -29,8 +31,22 @@ public class NewsFragment extends BaseFragment {
     }
 
     @Override
-    protected void initData(Bundle savedInstanceState) {
+    protected void initData(@Nullable Bundle savedInstanceState) {
+        webView.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+        });
         webView.loadUrl(Contracts.TIANMAO_GUOJI_URL);
+    }
+
+    @Override
+    protected void lazyLoad() {
+        if(!isPrepared|| !isVisible) {
+            return;
+        }
     }
 
 

@@ -38,6 +38,14 @@
             android:textColor="@color/colorFont" />
     </LinearLayout>
 
+
+    <TextView
+        android:id="@+id/act_search_tv_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="搜索不出商品" />
+
     <GridView
         android:id="@+id/act_search_result_gv"
         android:layout_width="match_parent"

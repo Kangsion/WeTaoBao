@@ -8,12 +8,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.ksion.wetaobao.Application.CustomApplcation;
 import com.example.ksion.wetaobao.R;
 import com.example.ksion.wetaobao.base.BaseActivity;
 import com.example.ksion.wetaobao.contract.SettingContract;
 import com.example.ksion.wetaobao.presenter.ActSettingPersenterImpl;
 
-import zhangphil.iosdialog.widget.ActionSheetDialog;
+//import zhangphil.iosdialog.widget.ActionSheetDialog;
 
 /**
  * Created by Ksion on 2017/9/18.
@@ -40,7 +41,10 @@ public class SettingActivity extends BaseActivity implements SettingContract.Set
         mActSettingIvBack= (ImageView) findViewById(R.id.act_setting_iv_back);
         mActSettingPersonal= (LinearLayout) findViewById(R.id.act_setting_ln_person);
         mActSettingExit= (TextView) findViewById(R.id.act_personal_setting_tv_exit);
+
         mActSettingIvBack.setOnClickListener(this);
+        mActSettingExit.setOnClickListener(this);
+        mActSettingPersonal.setOnClickListener(this);
     }
 
     @Override
@@ -55,19 +59,22 @@ public class SettingActivity extends BaseActivity implements SettingContract.Set
                 finish();
                 break;
             case R.id.act_personal_setting_tv_exit:
-                new ActionSheetDialog(SettingActivity.this)
-                        .builder()
-                        .setTitle("确定退出登录吗？")
-                        .setCancelable(true)
-                        .addSheetItem("确定",ActionSheetDialog.SheetItemColor.Red,
-                                new ActionSheetDialog.OnSheetItemClickListener() {
-
-                                    @Override
-                                    public void onClick(int which) {
-                                        //退出登录
-                                        persenter.logingOut();
-                                    }
-                                }).show();
+//                new ActionSheetDialog(SettingActivity.this)
+//                        .builder()
+//                        .setTitle("确定退出登录吗？")
+//                        .setCancelable(true)
+//                        .addSheetItem("确定",ActionSheetDialog.SheetItemColor.Red,
+//                                new ActionSheetDialog.OnSheetItemClickListener() {
+//
+//                                    @Override
+//                                    public void onClick(int which) {
+//                                        //退出登录
+//                                        CustomApplcation.getInstance().setCurrentUser(null);
+//                                        startActivity(new Intent(SettingActivity.this, LoginActivity.class));
+//
+//
+//                                    }
+//                                }).show();
                 break;
             case R.id.act_setting_ln_person:
                 startActivity(new Intent(SettingActivity.this,PersonalDetailActivity.class));
