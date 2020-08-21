@@ -25,6 +25,7 @@ import java.util.List;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobQueryResult;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SQLQueryListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
@@ -41,33 +42,32 @@ public class ActGoodsDetailsPresenterImpl implements GoodDetailsContract.GoodDet
     private ListView mXlvPl;
     private Button mBtnShoucang;
     private GoodDetailsContract.GoodDetailsView view;
-    private static final int LUNBO_NUM=2;
+    private static final int LUNBO_NUM = 2;
     //商品
     private Goods goods;
 
 
-    public  ActGoodsDetailsPresenterImpl(GoodDetailsContract.GoodDetailsView view)
-    {
-        this.view=view;
+    public ActGoodsDetailsPresenterImpl(GoodDetailsContract.GoodDetailsView view) {
+        this.view = view;
         view.setPresenter(this);
     }
 
     @Override
     public void initData() {
-       //获取控件
-        mRollVpAd=view.getmActGoodsDetailsRollVpAd();
-        mTvGoodsMoney=view.getmActGoodsDetailsTvMoney();
-        mTvGoodsName=view.getmActGoodsDetailsTvGoodsName();
-        mXlvPl=view.getmActGoodsDetailsXlv();
-        mBtnShoucang=view.getmActGoodsDetailsBtnShoucang();
+        //获取控件
+        mRollVpAd = view.getmActGoodsDetailsRollVpAd();
+        mTvGoodsMoney = view.getmActGoodsDetailsTvMoney();
+        mTvGoodsName = view.getmActGoodsDetailsTvGoodsName();
+        mXlvPl = view.getmActGoodsDetailsXlv();
+        mBtnShoucang = view.getmActGoodsDetailsBtnShoucang();
 
         //获取数据
-        goods= (Goods) CustomApplcation.getDatas("goods",false);
+        goods = (Goods) CustomApplcation.getDatas("goods", false);
         //初始化商品
         initGood();
         //初始化评论
         queryDiscuss(goods.getGoodId());
-        if(QueryIsCollection()) {
+        if (QueryIsCollection()) {
             mBtnShoucang.setEnabled(false);
         } else {
             mBtnShoucang.setEnabled(true);
@@ -75,34 +75,33 @@ public class ActGoodsDetailsPresenterImpl implements GoodDetailsContract.GoodDet
     }
 
     private void initGood() {
-        List<String> imgs=new ArrayList<>();
+        List<String> imgs = new ArrayList<>();
         for (int i = 0; i < LUNBO_NUM; i++) {
 
             imgs.add(goods.getGoodsImgs().getUrl());
         }
 
-        mRollVpAd.setAdapter(new GoodRollPageViewAdapter(view.getContext(),imgs));
+        mRollVpAd.setAdapter(new GoodRollPageViewAdapter(view.getContext(), imgs));
 
-        if(goods!=null) {
+        if (goods != null) {
             mTvGoodsName.setText(goods.getGoodsName());
             mTvGoodsMoney.setText("￥" + goods.getGoodsPrice());
         }
     }
 
-    private void queryDiscuss(String goodId)
-    {
-        String sql="select * from Discuss where goodId='"+goodId+"'";
-//        new BmobQuery<Discuss>().doSQLQuery(view.getContext(),sql, new SQLQueryListener<Discuss>() {
-//            @Override
-//            public void done(BmobQueryResult<Discuss> bmobQueryResult, BmobException e) {
-//                   if(bmobQueryResult!=null)
-//                   {
-//                       mXlvPl.setAdapter(new DiscussXlvAdapter(bmobQueryResult.getResults(),
-//                               view.getContext()));
-//                       Log.e("tag",bmobQueryResult.getResults().size()+"");
-//                   }
-//            }
-//        });
+    private void queryDiscuss(String goodId) {
+        BmobQuery<Discuss> query = new BmobQuery<>();
+        query.addWhereEqualTo("goodId", goodId);
+        query.findObjects(new FindListener<Discuss>() {
+            @Override
+            public void done(List<Discuss> list, BmobException e) {
+                if(e == null) {
+                      mXlvPl.setAdapter(new DiscussXlvAdapter(list,
+                               view.getContext()));
+                   Log.e("tag",list.size()+"");
+                }
+            }
+        });
     }
 
 
@@ -113,46 +112,45 @@ public class ActGoodsDetailsPresenterImpl implements GoodDetailsContract.GoodDet
 
     @Override
     public void joinShopCar() {
-//         final String phone= CustomApplcation.getInstance().getCurrentUser().getPhone();
-//         final String goodId=goods.getGoodId();
-//         String sql="select * from ShopCar where phone='"+phone+"' and goodId='"+goodId+"'";
-//         new BmobQuery<ShopCar>().doSQLQuery(view.getContext(),sql,new SQLQueryListener<ShopCar>(){
-//             @Override
-//             public void done(BmobQueryResult bmobQueryResult, BmobException e) {
-//                 if(!bmobQueryResult.getResults().isEmpty()) {
-//                     ShopCar shopCar= (ShopCar) bmobQueryResult.getResults().get(0);
-//                     shopCar.increment("count",1);
-////                     shopCar.update(view.getContext(), new UpdateListener() {
-////                         @Override
-////                         public void onSuccess() {
-////                             view.showMsg("已成功加入购物车");
-////                         }
-////
-////                         @Override
-////                         public void onFailure(int i, String s) {
-////                             view.showMsg("加入购物车失败"+s);
-////                         }
-////                     });
-//                 } else {
-//                     ShopCar shopCar = new ShopCar();
-//                     shopCar.setPhone(phone);
-//                     shopCar.setGoodId(goodId);
-//                     shopCar.setCount(1);
-//                     shopCar.save(view.getContext(), new SaveListener() {
-//                         @Override
-//                         public void onSuccess() {
-//                             view.showMsg("已成功加入购物车");
-//                         }
-//
-//                         @Override
-//                         public void onFailure(int i, String s) {
-//                             view.showMsg("加入购物车失败" + s);
-//                         }
-//                     });
-//                 }
-//             }
-//         });
-
+        final String phone = CustomApplcation.getInstance().getCurrentUser().getPhone();
+        final String goodId = goods.getGoodId();
+        BmobQuery<ShopCar> query = new BmobQuery<>();
+        query.addWhereEqualTo("phone", phone);
+        query.addWhereEqualTo("goodId", goodId);
+        query.findObjects(new FindListener<ShopCar>() {
+            @Override
+            public void done(List<ShopCar> list, BmobException e) {
+                if(e == null) {
+                    ShopCar shopCar = list.get(0);
+                    shopCar.increment("count",1);
+                    shopCar.update(new UpdateListener() {
+                        @Override
+                        public void done(BmobException e) {
+                            if(e == null) {
+                                view.showMsg("已成功加入购物车");
+                            } else {
+                                view.showMsg("加入购物车失败"+ e);
+                            }
+                        }
+                    });
+                } else {
+                    ShopCar shopCar = new ShopCar();
+                     shopCar.setPhone(phone);
+                     shopCar.setGoodId(goodId);
+                     shopCar.setCount(1);
+                     shopCar.save(new SaveListener<String>() {
+                          @Override
+                          public void done(String s, BmobException e) {
+                              if(e == null) {
+                                  view.showMsg("已成功加入购物车");
+                              } else {
+                                  view.showMsg("加入购物车失败" + e);
+                              }
+                          }
+                      });
+                }
+            }
+        });
     }
 
     @Override
@@ -162,45 +160,44 @@ public class ActGoodsDetailsPresenterImpl implements GoodDetailsContract.GoodDet
 
     @Override
     public void GoodCollection() {
-        if(CustomApplcation.getInstance().getCurrentUser()!=null) {
+        if (CustomApplcation.getInstance().getCurrentUser() != null) {
             String phone = CustomApplcation.getInstance().getCurrentUser().getPhone();
             Collection collection = new Collection();
             collection.setPhone(phone);
             collection.setGoodId(goods.getGoodId());
-//            collection.save(view.getContext(), new SaveListener() {
-//                @Override
-//                public void onSuccess() {
-//                    view.showMsg("收藏成功");
-//                    mBtnShoucang.setEnabled(false);
-//                }
-//
-//                @Override
-//                public void onFailure(int i, String s) {
-//                    view.showMsg("收藏失败" + s);
-//                }
-//            });
+            collection.update(new UpdateListener() {
+                @Override
+                public void done(BmobException e) {
+                    if (e == null) {
+                        view.showMsg("收藏成功");
+                        mBtnShoucang.setEnabled(false);
+                    } else {
+                        view.showMsg("收藏失败" + e);
+                    }
+                }
+            });
         } else {
             view.jumpActivity();
         }
     }
-      public  boolean isCollection=false;
-    public boolean QueryIsCollection() {
-        if(CustomApplcation.getInstance().getCurrentUser()!=null) {
+
+    public boolean isCollection = false;
+
+    public  boolean QueryIsCollection() {
+        if (CustomApplcation.getInstance().getCurrentUser() != null) {
             String phone = CustomApplcation.getInstance().getCurrentUser().getPhone();
             final String goodId = goods.getGoodId();
-            String sql = "select * from Collection where phone='"+phone+"'";
-//            new BmobQuery<Collection>().doSQLQuery(view.getContext(), sql, new SQLQueryListener<Collection>() {
-//                @Override
-//                public void done(BmobQueryResult<Collection> bmobQueryResult, BmobException e) {
-//                    if (bmobQueryResult != null) {
-//                        for (int i = 0; i < bmobQueryResult.getResults().size(); i++) {
-//                          if(bmobQueryResult.getResults().get(i).getGoodId().contains(goodId)) {
-//                              isCollection=true;
-//                          }
-//                        }
-//                    }
-//                }
-//            });
+            BmobQuery<Collection> query = new BmobQuery<>();
+            query.addWhereEqualTo("phone", phone);
+            query.addWhereEqualTo("goodId", goodId);
+            query.findObjects(new FindListener<Collection>() {
+                @Override
+                public void done(List<Collection> list, BmobException e) {
+                    if (list.size() != 0) {
+                        isCollection = true;
+                    }
+                }
+            });
         }
         return isCollection;
     }

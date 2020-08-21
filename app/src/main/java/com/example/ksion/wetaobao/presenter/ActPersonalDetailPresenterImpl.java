@@ -12,6 +12,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.UpdateListener;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -59,21 +60,18 @@ public class ActPersonalDetailPresenterImpl implements PersonalDetailContract.Pe
 
     @Override
     public void updateUserSex(final String text) {
-        String UserId=CustomApplcation.getInstance().getCurrentUser().getObjectId();
-        User user=new User();
+        User user = CustomApplcation.getInstance().getCurrentUser();
         user.setSex(text);
-//        user.update(view.getContext(), UserId, new UpdateListener() {
-//            @Override
-//            public void onSuccess() {
-//                CustomApplcation.getInstance().getCurrentUser().setSex(text);
-//                view.showMsg("修改成功");
-//            }
-//
-//            @Override
-//            public void onFailure(int i, String s) {
-//                view.showMsg(s);
-//            }
-//        });
+        user.update(new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if(e == null) {
+                    view.showMsg("修改成功");
+                } else {
+                    view.showMsg("修改失敗：" + e);
+                }
+            }
+        });
     }
 
 

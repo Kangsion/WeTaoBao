@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.example.ksion.wetaobao.Application.CustomApplcation;
 import com.example.ksion.wetaobao.adapter.ActGoodsResultAdapter;
@@ -17,6 +18,7 @@ import java.util.List;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobQueryResult;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SQLQueryListener;
 
 /**
@@ -41,19 +43,22 @@ public class ActGoodsResultPresenterImpl implements GoodResultContract.GoodResul
 
     @Override
     public void initData() {
-        gridView=view.getmActGoodsResultGv();
-        String sql="select * from Goods where goodsTypeId='"+typeId+"'";
-//        new BmobQuery<Goods>().doSQLQuery(view.getContext(),sql, new SQLQueryListener<Goods>() {
-//            @Override
-//            public void done(BmobQueryResult<Goods> bmobQueryResult, BmobException e) {
-//                if(!bmobQueryResult.getResults().isEmpty()) {
-//                    goodsList = bmobQueryResult.getResults();
-//                    gridView.setAdapter(new ActGoodsResultAdapter(goodsList, CustomApplcation.getInstance().context));
-//                    initEvent();
-//                }
-//            }
-//        });
-
+        gridView = view.getmActGoodsResultGv();
+        BmobQuery<Goods> query = new BmobQuery<>();
+        query.addWhereEqualTo("goodsTypeId", typeId);
+        query.findObjects(new FindListener<Goods>() {
+            @Override
+            public void done(List<Goods> list, BmobException e) {
+                System.out.println("goodResult:" + list);
+                if(e == null) {
+                    goodsList = list;
+                    gridView.setAdapter(new ActGoodsResultAdapter(list, CustomApplcation.getInstance().context));
+                    initEvent();
+                } else {
+                    Toast.makeText(view.getContext(), "商品：" + e, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     /**

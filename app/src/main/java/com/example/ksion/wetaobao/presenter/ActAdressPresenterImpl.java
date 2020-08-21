@@ -22,6 +22,8 @@ import java.util.List;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobQueryResult;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.QueryListener;
 import cn.bmob.v3.listener.SQLQueryListener;
 import cn.bmob.v3.listener.UpdateListener;
 
@@ -44,41 +46,37 @@ public class ActAdressPresenterImpl implements AddressContract.AddressPresenter 
 
      @Override
     public void updateAddress() {
-         final String address=mActAdressEdit.getText().toString().trim();
-         String UserId=CustomApplcation.getInstance().getCurrentUser().getObjectId();
-         User user=new User();
+         final String address = mActAdressEdit.getText().toString().trim();
+         String UserId = CustomApplcation.getInstance().getCurrentUser().getObjectId();
+         User user = new User();
          user.setAddress(address);
-//         user.update(view.getContext(), UserId, new UpdateListener() {
-//             @Override
-//             public void onSuccess() {
-//                 CustomApplcation.getInstance().getCurrentUser().setAddress(address);
-//                 view.showMsg("修改成功");
-//                 view.jumpActivity();
-//             }
-//
-//             @Override
-//             public void onFailure(int i, String s) {
-//                 view.showMsg(s);
-//             }
-//         });
+         user.update(UserId, new UpdateListener() {
+             @Override
+             public void done(BmobException e) {
+                 if(e == null) {
+                     CustomApplcation.getInstance().getCurrentUser().setAddress(address);
+                     view.showMsg("修改成功");
+                     view.jumpActivity();
+                 } else {
+                     view.showMsg("修改失败");
+                 }
+             }
+         });
     }
 
     @Override
     public void initData() {
         mActAdressEdit=view.getmActAddressEdit();
-
+        BmobQuery<User> query = new BmobQuery<User>();
         String phone=CustomApplcation.getInstance().getCurrentUser().getPhone();
-        String sql="select * from User where phone='"+phone+"'";
-//        new BmobQuery<User>().doSQLQuery(view.getContext(), sql, new SQLQueryListener<User>() {
-//            @Override
-//            public void done(BmobQueryResult<User> bmobQueryResult, BmobException e) {
-//                if(bmobQueryResult!=null) {
-//                    mActAdressEdit.setText(bmobQueryResult.getResults().get(0).getAddress());
-//
-//                }
-//
-//            }
-//        });
+        query.getObject(phone, new QueryListener<User>() {
+            @Override
+            public void done(User user, BmobException e) {
+                if(user != null) {
+                  mActAdressEdit.setText(user.getAddress());
+                }
+            }
+        });
     }
 
 }

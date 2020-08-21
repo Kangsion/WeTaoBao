@@ -23,6 +23,7 @@ import java.util.zip.Inflater;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobQueryResult;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SQLQueryListener;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -83,31 +84,33 @@ public class DiscussXlvAdapter extends BaseAdapter {
         //查询头像信息
         final ViewHolder finalViewHolder = viewHolder;
         //根据用户Id查询用户信息
-        String sql="select * from User where phone='"+discussList.get(position).getPhone()+"'";
-//        new BmobQuery<User>().doSQLQuery(context,sql, new SQLQueryListener<User>() {
-//            @Override
-//            public void done(BmobQueryResult<User> bmobQueryResult, BmobException e) {
-//
-//                    if(bmobQueryResult!=null) {
-//                           User user=bmobQueryResult.getResults().get(0);
-//                           Log.e("user",user.getPhone());
-//                        if (user.getUserHead().getUrl() == null) {//头像为空,则显示默认头像
-//                            Picasso.with(context).load(Contracts.DEFALT_HEAD_URL).into(finalViewHolder.circleImageViewHead);
-//                        } else {
-//                            //查询成功,设置头像
-//                            Picasso.with(context).load(user.getUserHead().getUrl()).into(finalViewHolder.circleImageViewHead);
-//                        }
-//                        //设置用户名
-//                        finalViewHolder.tvUname.setText(user.getUserName());
-//                        //设置性别
-//                        if (user.getSex() == "男") {
-//                            finalViewHolder.imgSex.setImageResource(R.drawable.boy);
-//                        } else {
-//                            finalViewHolder.imgSex.setImageResource(R.drawable.grils);
-//                        }
-//                    }
-//                }
-//        });
+        BmobQuery<User> query = new BmobQuery<>();
+        query.addWhereEqualTo("phone", discussList.get(position).getPhone());
+        query.findObjects(new FindListener<User>() {
+            @Override
+            public void done(List<User> list, BmobException e) {
+                if(e == null) {
+                    if(list.size() > 0) {
+                           User user= list.get(0);
+                           Log.e("user",user.getPhone());
+                        if (user.getUserHead().getUrl() == null) {//头像为空,则显示默认头像
+                            Picasso.with(context).load(Contracts.DEFALT_HEAD_URL).into(finalViewHolder.circleImageViewHead);
+                        } else {
+                            //查询成功,设置头像
+                            Picasso.with(context).load(user.getUserHead().getUrl()).into(finalViewHolder.circleImageViewHead);
+                        }
+                        //设置用户名
+                        finalViewHolder.tvUname.setText(user.getUserName());
+                        //设置性别
+                        if (user.getSex() == "男") {
+                            finalViewHolder.imgSex.setImageResource(R.drawable.boy);
+                        } else {
+                            finalViewHolder.imgSex.setImageResource(R.drawable.grils);
+                        }
+                    }
+                }
+            }
+        });
         return convertView;
     }
 

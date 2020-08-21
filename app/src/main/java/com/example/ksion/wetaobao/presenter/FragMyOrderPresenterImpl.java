@@ -9,9 +9,12 @@ import com.example.ksion.wetaobao.adapter.FragMyOrderAdapter;
 import com.example.ksion.wetaobao.bean.Order;
 import com.example.ksion.wetaobao.contract.FragOrderContract;
 
+import java.util.List;
+
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobQueryResult;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SQLQueryListener;
 
 /**
@@ -35,18 +38,15 @@ public class FragMyOrderPresenterImpl implements FragOrderContract.FragOrderPres
         myOrderListView=view.getMyOrderListView();
         myOrderListView.setEnabled(false);
         String phone= CustomApplcation.getInstance().getCurrentUser().getPhone();
-        String sql="select * from Order phone='"+phone+"'";
-//        new BmobQuery<Order>().doSQLQuery(view.getOrderContext(), sql, new SQLQueryListener<Order>() {
-//            @Override
-//            public void done(BmobQueryResult<Order> bmobQueryResult, BmobException e) {
-//                 if(bmobQueryResult!=null) {
-//                     myOrderListView.setAdapter(new FragMyOrderAdapter(view.getOrderContext(),
-//                             bmobQueryResult.getResults()));
-//                 }
-//            }
-//        });
+        BmobQuery<Order> query = new BmobQuery<>();
+        query.addWhereEqualTo("phone", phone);
+        query.findObjects(new FindListener<Order>() {
+            @Override
+            public void done(List<Order> list, BmobException e) {
+                if(e == null) {
+                    myOrderListView.setAdapter(new FragMyOrderAdapter(view.getOrderContext(), list));
+                }
+            }
+        });
     }
-
-
-
 }

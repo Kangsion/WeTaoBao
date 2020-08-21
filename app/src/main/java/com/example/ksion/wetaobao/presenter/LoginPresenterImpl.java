@@ -60,30 +60,7 @@ public class LoginPresenterImpl implements LoginContract.LoginPresenter {
                     }
                 }
             });
-
-//            new BmobQuery<User>().doSQLQuery(mView.getContext(), sql, new SQLQueryListener<User>() {
-//                @Override
-//                public void done(BmobQueryResult<User> bmobQueryResult, BmobException e) {
-//                    if (bmobQueryResult!=null) {
-//                         user = bmobQueryResult.getResults().get(0);
-//                    } else {
-//                        mView.showMsg("用户不存在");
-//                    }
-//                        if (user != null) {
-//                            if (phone.equals(user.getPhone()) && password.equals(user.getPwd())) {
-//                                mView.showMsg("登录成功");
-//                                CustomApplcation.getInstance().setCurrentUser(user);
-//                                mView.jumpActivity();
-//                            } else {
-//                                mView.showMsg("密码错误！\r\n");
-//                            }
-//                        } else {
-//                            mView.showMsg("用户不存在");
-//                        }
-//                    }
-//                 });
        }
-
     }
 
     @Override

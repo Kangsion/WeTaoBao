@@ -35,40 +35,27 @@ public class ActUserNamePresenterImpl implements UserNameContract.UserNamePresen
      @Override
     public void updateUserName() {
          final String username=mActAdressEdit.getText().toString().trim();
-         String UserId=CustomApplcation.getInstance().getCurrentUser().getObjectId();
-         User user=new User();
+         User user = CustomApplcation.getInstance().getCurrentUser();
          user.setUserName(username);
-//         user.update(view.getContext(), UserId, new UpdateListener() {
-//             @Override
-//             public void onSuccess() {
-//                 CustomApplcation.getInstance().getCurrentUser().setUserName(username);
-//                 view.showMsg("修改成功");
-//                 view.jumpActivity();
-//             }
-//
-//             @Override
-//             public void onFailure(int i, String s) {
-//                 view.showMsg(s);
-//             }
-//         });
+         user.update(new UpdateListener() {
+             @Override
+             public void done(BmobException e) {
+                if(e == null) {
+                    CustomApplcation.getInstance().getCurrentUser().setUserName(username);
+                    view.showMsg("修改成功");
+                    view.jumpActivity();
+                } else {
+                    view.showMsg("修改失敗" +e.toString());
+                }
+             }
+         });
     }
 
     @Override
     public void initData() {
         mActAdressEdit=view.getmActUserNameEdit();
-
-        String phone=CustomApplcation.getInstance().getCurrentUser().getPhone();
-        String sql="select * from User where phone='"+phone+"'";
-//        new BmobQuery<User>().doSQLQuery(view.getContext(), sql, new SQLQueryListener<User>() {
-//            @Override
-//            public void done(BmobQueryResult<User> bmobQueryResult, BmobException e) {
-//                if(bmobQueryResult!=null) {
-//                    mActAdressEdit.setText(bmobQueryResult.getResults().get(0).getUserName());
-//
-//                }
-//
-//            }
-//        });
+        User user = CustomApplcation.getInstance().getCurrentUser();
+        mActAdressEdit.setText(user.getUserName());
     }
 
 }

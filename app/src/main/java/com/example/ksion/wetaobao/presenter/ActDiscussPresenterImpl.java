@@ -9,7 +9,9 @@ import com.example.ksion.wetaobao.Application.CustomApplcation;
 import com.example.ksion.wetaobao.bean.Discuss;
 import com.example.ksion.wetaobao.contract.DiscussContract;
 
+import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 /**
  * Created by Ksion on 2017/11/6.
@@ -21,7 +23,7 @@ public class ActDiscussPresenterImpl implements DiscussContract.DiscussPresenter
     DiscussContract.DiscussView view;
 
     public ActDiscussPresenterImpl(DiscussContract.DiscussView view) {
-         this.view=view;
+         this.view = view;
          view.setPresenter(this);
     }
 
@@ -35,23 +37,20 @@ public class ActDiscussPresenterImpl implements DiscussContract.DiscussPresenter
             discuss.setPhone(phone);
             discuss.setDiscussText(Content);
             discuss.setGoodId(goodId);
-//            discuss.save(view.getContext(), new SaveListener() {
-//                @Override
-//                public void onSuccess() {
-//                    Toast.makeText(view.getContext(), "发表评论成功", Toast.LENGTH_SHORT).show();
-//                }
-//
-//                @Override
-//                public void onFailure(int i, String s) {
-//                    Toast.makeText(view.getContext(), "发表评论失败" + s, Toast.LENGTH_SHORT).show();
-//                }
-//            });
+            discuss.update(new UpdateListener() {
+                @Override
+                public void done(BmobException e) {
+                    if (e == null) {
+                        Toast.makeText(view.getContext(), "发表评论成功", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(view.getContext(), "发表评论失败" + e, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
         } else {
             Toast.makeText(view.getContext(), "内容不能为空", Toast.LENGTH_SHORT).show();
         }
-
     }
-
 
 
     @Override

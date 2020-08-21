@@ -26,6 +26,7 @@ import java.util.List;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobQueryResult;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SQLQueryListener;
 
 /**
@@ -126,25 +127,24 @@ public class FlagHomePresenterlmpl  implements HomeContract.IHomePresenter {
     private void TuiJianGoods() {
         String typeId="01";
         String sql="select * from Goods where goodsTypeId='"+typeId+"'";
-//        new BmobQuery<Goods>().doSQLQuery(mView.getHomeContext(), sql, new SQLQueryListener<Goods>() {
-//            @Override
-//            public void done(final BmobQueryResult<Goods> bmobQueryResult, BmobException e) {
-//                   if(bmobQueryResult!=null) {
-//                       mGridViewGoodList.setAdapter(new ActGoodsResultAdapter(
-//                       bmobQueryResult.getResults(),mView.getHomeContext()));
-//
-//                       mGridViewGoodList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                           @Override
-//                           public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-//                               CustomApplcation.putDatas("goods",bmobQueryResult.getResults().get(position));
-//                               FlagHomePresenterlmpl.this.mView.jumpActivity(12,bmobQueryResult.getResults()
-//                                       .get(position).getGoodId());
-//                           }
-//                       });
-//                   }
-//            }
-//        });
+        BmobQuery<Goods> query = new BmobQuery<>();
+        query.addWhereEqualTo("goodsTypeId", typeId);
+        query.findObjects(new FindListener<Goods>() {
+            @Override
+            public void done(List<Goods> list, BmobException e) {
+                if (e == null) {
+                    mGridViewGoodList.setAdapter(new ActGoodsResultAdapter(list, mView.getHomeContext()));
+                    mGridViewGoodList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                            CustomApplcation.putDatas("goods", list.get(position));
+                            FlagHomePresenterlmpl.this.mView.jumpActivity(12, list.get(position).getGoodId());
+                        }
+                    });
 
+                }
+            }
+        });
     }
 
     private void initEvent() {

@@ -21,6 +21,7 @@ import java.util.List;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobQueryResult;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SQLQueryListener;
 
 /**
@@ -66,25 +67,27 @@ public class ActCollectionAdapter  extends BaseAdapter{
         } else {
             holder= (ViewHolder) view.getTag();
         }
-          String sql="select * from Goods where goodId='"+collectionList.get(position).getGoodId()+"'";
+         // String sql="select * from Goods where goodId='"+collectionList.get(position).getGoodId()+"'";
         final ViewHolder finalHolder = holder;
-//        new BmobQuery<Goods>().doSQLQuery(context, sql, new SQLQueryListener<Goods>() {
-//              @Override
-//              public void done(BmobQueryResult<Goods> bmobQueryResult, BmobException e) {
-//                    if(bmobQueryResult!=null) {
-//                        Goods good=bmobQueryResult.getResults().get(0);
-//                        Picasso.with(context).load(good.getGoodsImgs().getUrl()).into(finalHolder.mGoodImg);
-//                        finalHolder.mGoodName.setText(good.getGoodsName());
-//                        finalHolder.mGoodPrice.setText(good.getGoodsPrice()+"");
-//                        if(isShow) {
-//                            finalHolder.checkBox.setVisibility(View.VISIBLE);
-//                        } else {
-//                            finalHolder.checkBox.setVisibility(View.INVISIBLE);
-//                        }
-//                        finalHolder.checkBox.setChecked(isSelected.get(position));
-//                    }
-//              }
-//          });
+        BmobQuery<Goods> query = new BmobQuery<>();
+        query.addWhereEqualTo("goodId", collectionList.get(position).getGoodId());
+        query.findObjects(new FindListener<Goods>() {
+            @Override
+            public void done(List<Goods> list, BmobException e) {
+                if(e == null) {
+                    Goods good = list.get(0);
+                    Picasso.with(context).load(good.getGoodsImgs().getUrl()).into(finalHolder.mGoodImg);
+                    finalHolder.mGoodName.setText(good.getGoodsName());
+                    finalHolder.mGoodPrice.setText(good.getGoodsPrice()+"");
+                    if(isShow) {
+                        finalHolder.checkBox.setVisibility(View.VISIBLE);
+                    } else {
+                        finalHolder.checkBox.setVisibility(View.INVISIBLE);
+                    }
+                    finalHolder.checkBox.setChecked(isSelected.get(position));
+                }
+            }
+        });
         return view;
     }
 

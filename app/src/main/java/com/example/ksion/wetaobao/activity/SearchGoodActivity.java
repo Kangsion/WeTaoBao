@@ -23,6 +23,7 @@ import cn.bmob.v3.BmobPushManager;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobQueryResult;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SQLQueryListener;
 
 /**
@@ -70,37 +71,37 @@ public class SearchGoodActivity extends BaseActivity  implements View.OnClickLis
     private void searchGood() {
         final String goodName=mSearchContent.getText().toString().trim();
         if(!goodName.isEmpty()) {
-            String sql="select * from Goods";
-//            new BmobQuery<Goods>().doSQLQuery(this, sql, new SQLQueryListener<Goods>() {
-//                @Override
-//                public void done(BmobQueryResult<Goods> bmobQueryResult, BmobException e) {
-//                      if(bmobQueryResult!=null) {
-//                          List<Goods> goodsList=bmobQueryResult.getResults();
-//                          for (int i = 0; i < goodsList.size(); i++) {
-//                              if(goodsList.get(i).getGoodsName().contains(goodName)) {
-//                                  searchlist=new ArrayList<Goods>();
-//                                  searchlist.add(goodsList.get(i));
-//
-//                          }
-//                          }
-//                          if(searchlist!=null) {
-//                              mSearchGridView.setAdapter(new ActGoodsResultAdapter(searchlist,
-//                                      SearchGoodActivity.this));
-//
-//                              mSearchGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                                  @Override
-//                                  public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-//                                       CustomApplcation.putDatas("goods",searchlist.get(position));
-//                                        startActivity(new Intent(SearchGoodActivity.this,GoodsDetailsActivity.class));
-//                                  }
-//                              });
-//                          } else {
-//                              mTvSearchRsult.setVisibility(View.VISIBLE);
-//                              mSearchGridView.setVisibility(View.INVISIBLE);
-//                          }
-//                      }
-//                }
-//            });
+            //String sql="select * from Goods";
+            BmobQuery<Goods> query = new BmobQuery<>();
+            query.findObjects(new FindListener<Goods>() {
+                @Override
+                public void done(List<Goods> list, BmobException e) {
+                    if(e == null) {
+                        List<Goods> goodsList = list;
+                        for (int i = 0; i < goodsList.size(); i++) {
+                            if (goodsList.get(i).getGoodsName().contains(goodName)) {
+                                searchlist = new ArrayList<Goods>();
+                                searchlist.add(goodsList.get(i));
+                            }
+                        }
+                        if (searchlist != null) {
+                            mSearchGridView.setAdapter(new ActGoodsResultAdapter(searchlist,
+                                    SearchGoodActivity.this));
+
+                            mSearchGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                                    CustomApplcation.putDatas("goods", searchlist.get(position));
+                                    startActivity(new Intent(SearchGoodActivity.this, GoodsDetailsActivity.class));
+                                }
+                            });
+                        } else {
+                            mTvSearchRsult.setVisibility(View.VISIBLE);
+                            mSearchGridView.setVisibility(View.INVISIBLE);
+                        }
+                    }
+                }
+            });
         }
     }
 }

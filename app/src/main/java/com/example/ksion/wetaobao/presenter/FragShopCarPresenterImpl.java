@@ -26,8 +26,10 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobQueryResult;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.DeleteBatchListener;
+import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SQLQueryListener;
 import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 /**
  * Created by Ksion on 2017/9/8.
@@ -69,31 +71,34 @@ public class FragShopCarPresenterImpl implements FragShopcarContract.FragShopcar
         if(CustomApplcation.getInstance().getCurrentUser()!=null) {
             mTvMoney.setText("0.00");
             String phone=CustomApplcation.getInstance().getCurrentUser().getPhone();
-            String sql="select * from ShopCar where phone='"+phone+"'";
-//             new BmobQuery<ShopCar>().doSQLQuery(view.getShopCarContext(), sql, new SQLQueryListener<ShopCar>() {
-//                 @Override
-//                 public void done(BmobQueryResult<ShopCar> bmobQueryResult, BmobException e) {
-//                       if(bmobQueryResult!=null) {
-//                           mGnull.setVisibility(View.GONE);
-//                           mFragShopcarLn.setVisibility(View.VISIBLE);
-//                           mTvShopCarManager.setVisibility(View.VISIBLE);
-//                           listShopCas=bmobQueryResult.getResults();
-//
-//                           HashMap<Integer, Boolean> isChecked = new HashMap<>();
-//                           for (int i = 0; i < listShopCas.size(); i++) {
-//                               isChecked.put(i, false);
-//                           }
-//                           FragShopCarAdapter.setIsSelected(isChecked);
-//                           adapter= new FragShopCarAdapter(view.getShopCarContext(), bmobQueryResult.getResults(), FragShopCarPresenterImpl.this);
-//                           mShopCarlistView.setAdapter(adapter);
-//                       } else {
-//                           mGnull.setVisibility(View.VISIBLE);
-//                           mFragShopcarLn.setVisibility(View.GONE);
-//                           mTvShopCarManager.setVisibility(View.GONE);
-//                       }
-//                       }
-//             });
-               initEvent();
+            BmobQuery<ShopCar> query = new BmobQuery<>();
+            query.addWhereEqualTo("phone", phone);
+            query.findObjects(new FindListener<ShopCar>() {
+                @Override
+                public void done(List<ShopCar> list, BmobException e) {
+                    if(e == null) {
+                        if(list.size() == 0) {
+                            mGnull.setVisibility(View.GONE);
+                            mFragShopcarLn.setVisibility(View.VISIBLE);
+                            mTvShopCarManager.setVisibility(View.VISIBLE);
+                            listShopCas = list;
+
+                           HashMap<Integer, Boolean> isChecked = new HashMap<>();
+                           for (int i = 0; i < listShopCas.size(); i++) {
+                               isChecked.put(i, false);
+                           }
+                          FragShopCarAdapter.setIsSelected(isChecked);
+                          adapter= new FragShopCarAdapter(view.getShopCarContext(), list, FragShopCarPresenterImpl.this);
+                          mShopCarlistView.setAdapter(adapter);
+                        } else {
+                            mGnull.setVisibility(View.VISIBLE);
+                            mFragShopcarLn.setVisibility(View.GONE);
+                            mTvShopCarManager.setVisibility(View.GONE);
+                        }
+                    }
+                }
+            });
+           initEvent();
         }else{
             mGnull.setVisibility(View.VISIBLE);
             mFragShopcarLn.setVisibility(View.GONE);
@@ -133,7 +138,7 @@ public class FragShopCarPresenterImpl implements FragShopcarContract.FragShopcar
     public void submit() {
         for (int i=listShopCas.size()-1;i>=0;i--){
             if (FragShopCarAdapter.isSelected.get(i)) {
-                Order order=new Order();
+                Order order = new Order();
                 order.setPhone(listShopCas.get(i).getPhone());
                 order.setGoodId(listShopCas.get(i).getGoodId());
                 order.setGoodsCount(listShopCas.get(i).getCount());
@@ -141,20 +146,19 @@ public class FragShopCarPresenterImpl implements FragShopcarContract.FragShopcar
                 double Sum = Double.parseDouble(mTvMoney.getText().toString().trim());
                 order.setOerdersMoney(Sum);
                 final int finalI = i;
-//                order.save(view.getShopCarContext(), new SaveListener() {
-//                    @Override
-//                    public void onSuccess() {
-//                        listShopCas.remove(finalI);
-//                        adapter.notifyDataSetChanged();
-//                    }
-//
-//                    @Override
-//                    public void onFailure(int i, String s) {
-//                        view.showMsg(s);
-//                    }
-//                });
+                order.save(new SaveListener<String>() {
+                    @Override
+                    public void done(String s, BmobException e) {
+                        if(e == null) {
+                            listShopCas.remove(finalI);
+                            adapter.notifyDataSetChanged();
+                        } else {
+                            view.showMsg(s);
+                        }
+                    }
+                });
             }
-            }
+        }
     }
 
     @Override
@@ -183,19 +187,18 @@ public class FragShopCarPresenterImpl implements FragShopcarContract.FragShopcar
             if (FragShopCarAdapter.isSelected.get(i)) {
                  ShopCar shopCar=new ShopCar();
                 final int finalI = i;
-//                shopCar.delete(view.getShopCarContext(), listShopCas.get(i).getObjectId(),
-//                        new DeleteListener() {
-//                            @Override
-//                            public void onSuccess() {
-//                                listShopCas.remove(finalI);
-//                                adapter.notifyDataSetChanged();
-//                            }
-//
-//                            @Override
-//                            public void onFailure(int i, String s) {
-//                                view.showMsg("删除失败"+s);
-//                            }
-//                        });
+                shopCar.setObjectId(listShopCas.get(i).getObjectId());
+                shopCar.delete(new UpdateListener() {
+                    @Override
+                    public void done(BmobException e) {
+                        if(e == null) {
+                            listShopCas.remove(finalI);
+                            adapter.notifyDataSetChanged();
+                        } else {
+                            view.showMsg("删除失败" + e);
+                        }
+                    }
+                });
             }
         }
     }
@@ -209,19 +212,18 @@ public class FragShopCarPresenterImpl implements FragShopcarContract.FragShopcar
                 collection.setGoodId(listShopCas.get(i).getGoodId());
                 collection.setPhone(listShopCas.get(i).getPhone());
                 final int finalI = i;
-//                collection.save(view.getShopCarContext(),new SaveListener() {
-//                            @Override
-//                            public void onSuccess() {
-//                                listShopCas.remove(finalI);
-//                                adapter.notifyDataSetChanged();
-//                                view.showMsg("已移入收藏夹");
-//                            }
-//
-//                            @Override
-//                            public void onFailure(int i, String s) {
-//                                view.showMsg("收藏失败"+s);
-//                            }
-//                        });
+                collection.save(new SaveListener<String>() {
+                    @Override
+                    public void done(String s, BmobException e) {
+                        if(e == null) {
+                            listShopCas.remove(finalI);
+                            adapter.notifyDataSetChanged();
+                            view.showMsg("已移入收藏夹");
+                        } else {
+                            view.showMsg("收藏失败" + e);
+                        }
+                    }
+                });
             } }
         }
     }
@@ -231,16 +233,17 @@ public class FragShopCarPresenterImpl implements FragShopcarContract.FragShopcar
         if(CustomApplcation.getInstance().getCurrentUser()!=null) {
             String phone = CustomApplcation.getInstance().getCurrentUser().getPhone();
             final String goodId = listShopCas.get(position).getGoodId();
-            String sql = "select * from Collection where phone='"+phone+"'";
-//            new BmobQuery<Collection>().doSQLQuery(view.getShopCarContext(), sql, new SQLQueryListener<Collection>() {
-//                @Override
-//                public void done(BmobQueryResult<Collection> bmobQueryResult, BmobException e) {
-//                    for (int i = 0; i < bmobQueryResult.getResults().size(); i++) {
-//                        if(bmobQueryResult.getResults().get(i).getGoodId().contains(goodId)) {
-//                            isCollection = true;
-//                        } }
-//                }
-//            });
+            BmobQuery<Collection> query = new BmobQuery<>();
+            query.addWhereEqualTo("phone", phone);
+            query.addWhereEqualTo("goodId", goodId);
+            query.findObjects(new FindListener<Collection>() {
+                @Override
+                public void done(List<Collection> list, BmobException e) {
+                    if (list.size() != 0) {
+                        isCollection = true;
+                    }
+                }
+            });
         }
         return isCollection;
     }

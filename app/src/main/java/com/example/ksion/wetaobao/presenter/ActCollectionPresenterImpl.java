@@ -21,6 +21,7 @@ import cn.bmob.v3.datatype.BmobQueryResult;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SQLQueryListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 
 /**
@@ -51,43 +52,32 @@ public class ActCollectionPresenterImpl implements CollectionContract.Collection
 
     private void queryCollection() {
         String phone= CustomApplcation.getInstance().getCurrentUser().getPhone();
-        String sql="select * from Collection where phone='"+phone+"'";
-        BmobQuery<Collection> bmobQuery = new BmobQuery<>();
-        bmobQuery.findObjects(new FindListener<Collection>() {
+        BmobQuery<Collection> query = new BmobQuery<>();
+        query.addWhereContains("phone", phone);
+        query.findObjects(new FindListener<Collection>() {
             @Override
             public void done(List<Collection> list, BmobException e) {
+                if(list != null) {
+                    collectionList = list;
+                    HashMap<Integer, Boolean> isChecked = new HashMap<>();
+                    for (int i = 0; i < collectionList.size(); i++) {
+                        isChecked.put(i, false);
+                    }
 
+                    ActCollectionAdapter.setIsSelected(isChecked);
+                    mAdapter=new ActCollectionAdapter(view.getContext()
+                            ,collectionList);
+                    mGridCollection.setAdapter(mAdapter);
+                    mGridCollection.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                            CustomApplcation.putDatas("goods",collectionList.get(position));
+                            ActCollectionPresenterImpl.this.view.jumpActivity(collectionList.get(position).getGoodId());
+                        }
+                    });
+                }
             }
         });
-//        new BmobQuery<Collection>().doSQLQuery(view.getContext(), sql, new SQLQueryListener<Collection>() {
-//            @Override
-//            public void done(BmobQueryResult<Collection> bmobQueryResult, BmobException e) {
-//                if(e !=null) {
-//                    collectionList=bmobQueryResult.getResults();
-//                    HashMap<Integer, Boolean> isChecked = new HashMap<>();
-//                    for (int i = 0; i < collectionList.size(); i++) {
-//                        isChecked.put(i, false);
-//                    }
-//                    ActCollectionAdapter.setIsSelected(isChecked);
-//                    mAdapter=new ActCollectionAdapter(view.getContext()
-//                            ,collectionList);
-//                    mGridCollection.setAdapter(mAdapter);
-//
-//                    mGridCollection.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                        @Override
-//                        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-//                            CustomApplcation.putDatas("goods",collectionList.get(position));
-//                            ActCollectionPresenterImpl.this.view.jumpActivity(collectionList.get(position).getGoodId());
-//                        }
-//                    });
-//                }
-//            }
-
-//            @Override
-//            public void done(BmobQueryResult<Collection> bmobQueryResult, BmobException e) {
-//
-//            }
-        //});
     }
 
     @Override
@@ -121,16 +111,15 @@ public class ActCollectionPresenterImpl implements CollectionContract.Collection
             if(ActCollectionAdapter.isSelected.get(i)) {
                 Collection collection=new Collection();
                 final int finalI = i;
-//                collection.delete(view.getContext(), collectionList.get(i).getObjectId(), new DeleteListener() {
-//                    @Override
-//                    public void onSuccess() {
-//                        collectionList.remove(finalI);
-//                    }
-//
-//                    @Override
-//                    public void onFailure(int i, String s) {
-//                    }
-//                });
+                collection.setObjectId(collectionList.get(i).getObjectId());
+                collection.delete(new UpdateListener() {
+                    @Override
+                    public void done(BmobException e) {
+                        if(e == null) {
+                            collectionList.remove(finalI);
+                        }
+                    }
+                });
                 mAdapter.notifyDataSetChanged();
             }
         }
